@@ -1,1 +1,7 @@
-# xml_definition
+# How to make RPM
+
+```
+$ ./bootstrap.sh
+$ ./configure
+$ make
+```

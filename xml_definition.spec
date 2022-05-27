@@ -1,7 +1,7 @@
 
 Name:		xml_definition
-Version:	1.0
-Release:	g%{?rev}
+Version:	3.0.0
+Release:	1
 Summary:	XML definition files
 Group:		Applications/ScaleWX
 License:	Share

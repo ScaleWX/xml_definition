@@ -3,5 +3,5 @@
 ```
 $ ./bootstrap.sh
 $ ./configure
-$ make
+$ make rpm
 ```

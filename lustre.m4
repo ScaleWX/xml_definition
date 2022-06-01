@@ -472,15 +472,14 @@ dnl $1: number of INDENT
 dnl $2: index of FIELD
 dnl $3: name of FIELD
 dnl $4: type of FIELD
-dnl $5: type OPTION
-dnl $6: ost or mdt
-dnl $7: is first child of parent definition
+dnl $5: ost or mdt
+dnl $6: is first child of parent definition
 define(`JOBSTAT_FIELD_META_OPERATIONS',
-	`JOBSTAT_FIELD($1, $2, $3, $4, $5, $6, samples, $7)
-	 JOBSTAT_FIELD_V2($1, eval(`$2 + 1'), min_$3, $4, $5, $6, $3, $7, min)
-	 JOBSTAT_FIELD_V2($1, eval(`$2 + 2'), max_$3, $4, $5, $6, $3, $7, max)
-	 JOBSTAT_FIELD_V2($1, eval(`$2 + 3'), sum_$3, $4, $5, $6, $3, $7, sum)
-	 JOBSTAT_FIELD_V2($1, eval(`$2 + 4'), sumsq_$3, $4, $5, $6, $3, $7, sumsq)')dnl
+	`JOBSTAT_FIELD($1, $2, $3, $4, derive, $5, samples, $6)
+	 JOBSTAT_FIELD_V2($1, eval(`$2 + 1'), min_$3, $4, gauge, $5, $3, $6, min)
+	 JOBSTAT_FIELD_V2($1, eval(`$2 + 2'), max_$3, $4, gauge, $5, $3, $6, max)
+	 JOBSTAT_FIELD_V2($1, eval(`$2 + 3'), sum_$3, $4, derive, $5, $3, $6, sum)
+	 JOBSTAT_FIELD_V2($1, eval(`$2 + 4'), sumsq_$3, $4, derive, $5, $3, $6, sumsq)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: index of FIELD

@@ -105,11 +105,11 @@ define(`MD_STATS_ITEM_V2',
 	`ELEMENT($1, item, 
 	`NAME($1 + 1, md_stats_$2, 1)
 PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[usecs\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
-FIELD($1 + 1, 1, md_stats_$2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats, derive, md_stats_$2, md_stats, optype=md_stats_$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
-FIELD($1 + 1, 2, md_stats_$2_min, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_min, derive, md_stats_$2_min, md_stats_min, optype=md_stats_$2_min fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
-FIELD($1 + 1, 3, md_stats_$2_max, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_max, derive, md_stats_$2_max, md_stats_max, optype=md_stats_$2_max fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
-FIELD($1 + 1, 4, md_stats_$2_sum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_sum, derive, md_stats_$2_sum, md_stats_sum, optype=md_stats_$2_sum fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
-FIELD($1 + 1, 5, md_stats_$2_sumsq, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_sumsq, derive, md_stats_$2_sumsq, md_stats_sumsq, optype=md_stats_$2_sumsq fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)', $3)')dnl
+FIELD($1 + 1, 1, md_stats_$2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats, derive, md_stats_$2, md_stats, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
+FIELD($1 + 1, 2, md_stats_$2_min, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_min, derive, md_stats_$2_min, md_stats_min, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
+FIELD($1 + 1, 3, md_stats_$2_max, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_max, derive, md_stats_$2_max, md_stats_max, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
+FIELD($1 + 1, 4, md_stats_$2_sum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_sum, derive, md_stats_$2_sum, md_stats_sum, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
+FIELD($1 + 1, 5, md_stats_$2_sumsq, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_sumsq, derive, md_stats_$2_sumsq, md_stats_sumsq, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)', $3)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of EXPORT_MD_STATS_ITEM

@@ -5,6 +5,7 @@ BUILD_DIRS = BUILD BUILDROOT RPMS SOURCES SPECS SRPMS
 M4_DESTINATION_FILES = ime-1.1.m4 \
 	ime-1.2.m4 \
 	infiniband-0.1.m4 \
+  infiniband-1.0.m4 \
 	lustre-1.8.9.m4 \
 	lustre-2.1.6.m4 \
 	lustre-2.4.2.m4 \

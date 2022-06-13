@@ -127,11 +127,11 @@ define(`EXPORT_MD_STATS_ITEM_V2',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, exp_md_stats_$2, 1)
 PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[usecs\] +([[:digit:]]+) +([[:digit:]]+) +([[:digit:]]+) +([[:digit:]]+)', 0)
-FIELD($1 + 1, 1, $2, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, $2, exp_md_stats, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
-FIELD($1 + 1, 2, $2, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, $2, exp_md_stats_min_latency, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
-FIELD($1 + 1, 3, $2, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, $2, exp_md_stats_max_latency, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
-FIELD($1 + 1, 4, $2, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, $2, exp_md_stats_sum_latency, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
-FIELD($1 + 1, 5, $2, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, $2, exp_md_stats_sumsq_latency, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)', $3)')dnl
+FIELD($1 + 1, 1, exp_md_stats_$2, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, exp_md_stats_$2, exp_md_stats, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
+FIELD($1 + 1, 2, exp_md_stats_$2_min, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, exp_md_stats_$2_min, exp_md_stats_min_latency, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
+FIELD($1 + 1, 3, exp_md_stats_$2_max, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, exp_md_stats_$2_max, exp_md_stats_max_latency, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
+FIELD($1 + 1, 4, exp_md_stats_$2_sum, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, exp_md_stats_$2_sum, exp_md_stats_sum_latency, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
+FIELD($1 + 1, 5, exp_md_stats_$2_sumsq, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, exp_md_stats_$2_sumsq, exp_md_stats_sumsq_latency, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)', $3)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of OST_STATS_ITEM_PREFIX
@@ -152,11 +152,11 @@ define(`OST_STATS_ITEM_V2',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, ost_stats_$2, 1)
 PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] +([[:digit:]]+) +([[:digit:]]+) +([[:digit:]]+) +([[:digit:]]+)', 0)
-FIELD($1 + 1, 1, $2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2, ost_stats_samples, optype=$2 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
-FIELD($1 + 1, 2, $2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2, ost_stats_min_latency, optype=$2 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
-FIELD($1 + 1, 3, $2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2, ost_stats_max_latency, optype=$2 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
-FIELD($1 + 1, 4, $2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2, ost_stats_sum_latency, optype=$2 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
-FIELD($1 + 1, 5, $2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2, ost_stats_sumsq_latency, optype=$2 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
+FIELD($1 + 1, 1, ost_stats_$2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, stats, derive, ost_stats_$2, ost_stats_samples, optype=$2 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
+FIELD($1 + 1, 2, ost_stats_$2_min, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, stats, derive, ost_stats_$2_min, ost_stats_min_latency, optype=$2 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
+FIELD($1 + 1, 3, ost_stats_$2_max, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, stats, derive, ost_stats_$2_max, ost_stats_max_latency, optype=$2 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
+FIELD($1 + 1, 4, ost_stats_$2_sum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, stats, derive, ost_stats_$2_sum, ost_stats_sum_latency, optype=$2 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
+FIELD($1 + 1, 5, ost_stats_$2_sumsq, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, stats, derive, ost_stats_$2_sumsq, ost_stats_sumsq_latency, optype=$2 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
 ', $4)')dnl
 dnl
 dnl $1: number of INDENT
@@ -184,11 +184,11 @@ define(`EXPORT_OST_STATS_ITEM_V2',
 	`ELEMENT($1, item,
 	    `NAME($1 + 1, exp_ost_stats_$2, 1)
 PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] +([[:digit:]]+) +([[:digit:]]+) +([[:digit:]]+) +([[:digit:]]+)', 0)
-FIELD($1 + 1, 1, $2, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2, exp_ost_stats_samples, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
-FIELD($1 + 1, 2, $2, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2, exp_ost_stats_min_latency, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
-FIELD($1 + 1, 3, $2, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2, exp_ost_stats_max_latency, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
-FIELD($1 + 1, 4, $2, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2, exp_ost_stats_sum_latency, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
-FIELD($1 + 1, 5, $2, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2, exp_ost_stats_sumsq_latency, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)', $4)')dnl
+FIELD($1 + 1, 1, exp_ost_stats_$2, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, exp_ost_stats_$2, exp_ost_stats_samples, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
+FIELD($1 + 1, 2, exp_ost_stats_$2_min, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, exp_ost_stats_$2_min, exp_ost_stats_min_latency, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
+FIELD($1 + 1, 3, exp_ost_stats_$2_max, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, exp_ost_stats_$2_max, exp_ost_stats_max_latency, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
+FIELD($1 + 1, 4, exp_ost_stats_$2_sum, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, exp_ost_stats_$2_sum, exp_ost_stats_sum_latency, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
+FIELD($1 + 1, 5, exp_ost_stats_$2_sumsq, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, exp_ost_stats_$2_sumsq, exp_ost_stats_sumsq_latency, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)', $4)')dnl
 dnl $1: number of INDENT
 dnl $2: name of OST_STATS_ITEM_RW
 dnl $3: is first child of parent definition

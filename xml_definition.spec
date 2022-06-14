@@ -54,6 +54,7 @@ mkdir -p %{buildroot}%{_sysconfdir}
 %{_sysconfdir}/ime-1.1.xml
 %{_sysconfdir}/ime-1.2.xml
 %{_sysconfdir}/infiniband-0.1_definition.xml
+%{_sysconfdir}/infiniband-1.0_definition.xml
 %{_sysconfdir}/lustre-1.8_definition.xml
 %{_sysconfdir}/lustre-2.12.xml
 %{_sysconfdir}/lustre-2.13.xml

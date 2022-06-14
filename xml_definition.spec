@@ -1,6 +1,6 @@
 
 Name:		xml_definition
-Version:	3.0.2
+Version:	3.0.3
 Release:	1
 Summary:	XML definition files
 Group:		Applications/ScaleWX

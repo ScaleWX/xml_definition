@@ -24,6 +24,7 @@ mkdir -p %{buildroot}%{_sysconfdir}
 %{__install} -Dp -m0644 ime-1.1.xml %{buildroot}%{_sysconfdir}
 %{__install} -Dp -m0644 ime-1.2.xml %{buildroot}%{_sysconfdir}
 %{__install} -Dp -m0644 infiniband-0.1.xml %{buildroot}%{_sysconfdir}/infiniband-0.1_definition.xml
+%{__install} -Dp -m0644 infiniband-1.0.xml %{buildroot}%{_sysconfdir}/infiniband-1.0_definition.xml
 %{__install} -Dp -m0644 lustre-1.8.9.xml %{buildroot}%{_sysconfdir}/lustre-1.8_definition.xml
 %{__install} -Dp -m0644 lustre-2.1.6.xml %{buildroot}%{_sysconfdir}/lustre-2.1_definition.xml
 %{__install} -Dp -m0644 lustre-2.12.xml %{buildroot}%{_sysconfdir}/lustre-2.12.xml

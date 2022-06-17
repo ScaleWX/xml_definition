@@ -153,19 +153,19 @@ def main():
         "--definition_file",
         "-f",
         default="/etc/lustre.xml",
-        help="Lustre Definition file for collectd",
+        help="Specify the Lustre XML Definition file for collectd to be parsed",
     )
     parser.add_argument(
         "--item",
         "-i",
         default="all",
-        help="Lustre Definition file for collectd",
+        help="Specify the item to be shown",
     )
     parser.add_argument(
         "--check",
         "-c",
         default="no",
-        help="Lustre Definition file for collectd",
+        help="Specify yes to Check type instance duplication",
     )
     args = parser.parse_args()
     definition_xml = ET.parse(args.definition_file).getroot()

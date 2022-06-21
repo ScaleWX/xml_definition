@@ -19,10 +19,18 @@ class Item:
 
 class Field:
     def __init__(
-        self, index, name, collection_type, type_instance, tsdb_name, tsdb_tags
+        self,
+        index,
+        name,
+        plugin_instance,
+        collection_type,
+        type_instance,
+        tsdb_name,
+        tsdb_tags,
     ):
         self.index = index
         self.name = name
+        self.plugin_instance = plugin_instance
         self.collection_type = collection_type
         self.type_instance = type_instance
         self.tsdb_name = tsdb_name
@@ -34,7 +42,9 @@ def parse_field(field):
     field_name = field.find("./name").text
     for option in field.findall("option"):
         name = option.find("name").text
-        if name == "type":
+        if name == "plugin_instance":
+            plugin_instance = option.find("string").text
+        elif name == "type":
             collection_type = option.find("string").text
         elif name == "type_instance":
             type_instance = option.find("string").text
@@ -45,7 +55,13 @@ def parse_field(field):
         else:
             continue
     return Field(
-        index, field_name, collection_type, type_instance, tsdb_name, tsdb_tags
+        index,
+        field_name,
+        plugin_instance,
+        collection_type,
+        type_instance,
+        tsdb_name,
+        tsdb_tags,
     )
 
 
@@ -77,34 +93,57 @@ def parse_definition(definition_xml, definition):
         parse_entry(entry, "", definition)
 
 
-def print_item(item):
+def print_item_name(item):
     print("Item Name   : ", item.name)
+
+
+def print_item(item):
+    print_item_name(item)
     print("Item Pattern: ", item.pattern)
     print("Item Path   : ", item.path)
 
 
+def print_main_field(field):
+    print("    Field Name     : ", field.name)
+    print("    Plugin Instance: ", field.plugin_instance)
+    print("    Type Instance  : ", field.type_instance)
+    print("    TSDB Name      : ", field.tsdb_name)
+
+
 def print_field(field):
-    print("    Index        : ", field.index)
-    print("    Name         : ", field.name)
-    print("    Type         : ", field.collection_type)
-    print("    Type Instance: ", field.type_instance)
-    print("    TSDB Name    : ", field.tsdb_name)
-    print("    TSDB Tags    : ", field.tsdb_tags)
+    print("    Index          : ", field.index)
+    print_main_field(field)
+    print("    Type           : ", field.collection_type)
+    print("    TSDB Tags      : ", field.tsdb_tags)
 
 
-def show_all_items(definition):
+def show_all_items(definition, verbose):
     for item in definition.items:
-        print_item(item)
+        if verbose == "yes":
+            print_item(item)
+        else:
+            print_item_name(item)
         for field in item.fields:
-            print_field(field)
+            print("    ---")
+            if verbose == "yes":
+                print_field(field)
+            else:
+                print_main_field(field)
 
 
-def show_item(definition, requested_item):
+def show_item(definition, requested_item, verbose):
     for item in definition.items:
         if item.name == requested_item:
-            print_item(item)
+            if verbose == "yes":
+                print_item(item)
+            else:
+                print_item_name(item)
             for field in item.fields:
-                print_field(field)
+                print("    ->")
+                if verbose == "yes":
+                    print_field(field)
+                else:
+                    print_main_field(field)
 
 
 def check_type_instance_duplication(definition):
@@ -167,6 +206,12 @@ def main():
         default="no",
         help="Specify yes to Check type instance duplication",
     )
+    parser.add_argument(
+        "--verbose",
+        "-v",
+        default="no",
+        help="Specify yes to show the detailed information on the item(s)",
+    )
     args = parser.parse_args()
     definition_xml = ET.parse(args.definition_file).getroot()
     definition = Definition()
@@ -175,9 +220,9 @@ def main():
         check_type_instance_duplication(definition)
     else:
         if args.item == "all":
-            show_all_items(definition)
+            show_all_items(definition, args.verbose)
         else:
-            show_item(definition, args.item)
+            show_item(definition, args.item, args.verbose)
 
 
 if __name__ == "__main__":

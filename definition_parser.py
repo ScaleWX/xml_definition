@@ -47,6 +47,13 @@ class PluginInstance:
         self.tsdb_name = tsdb_name
 
 
+PLUGIN_INSTANCE_COLUMN_NAME = "Plugin Instance"
+TYPE_INSTANCE_COLUMN_NAME = "Type Instance"
+ITEM_NAME_COLUMN_NAME = "Item Name"
+FIELD_NAME_COLUMN_NAME = "Field Name"
+TSDB_NAME_COLUMN_NAME = "TSDB Name"
+
+
 class WidthIndex(Enum):
     PLUGIN_INSTANCE = 0
     TYPE_INSTANCE = 1
@@ -221,49 +228,50 @@ def get_plugin_instances(definition, target="all"):
 
 def infill(number):
     str = ""
-    for _ in range(number):
+    for _ in range(number + 1):
         str += " "
     return str
 
 
 def show_plugin_instances(plugin_instances, widths):
-    PLUGIN_INSTANCE = "Plugin Instance"
-    TYPE_INSTANCE = "Type Instance"
-    ITEM_NAME = "Item Name"
-    FIELD_NAME = "Field Name"
-    TSDB_NAME = "TSDB Name"
     print(
-        PLUGIN_INSTANCE,
-        infill(abs(widths[WidthIndex.PLUGIN_INSTANCE.value] - len(PLUGIN_INSTANCE)) + 1),
-        TYPE_INSTANCE,
-        infill(abs(widths[WidthIndex.TYPE_INSTANCE.value] - len(TYPE_INSTANCE)) + 1),
-        ITEM_NAME,
-        infill(abs(widths[WidthIndex.ITEM_NAME.value] - len(ITEM_NAME)) + 1),
-        FIELD_NAME,
-        infill(abs(widths[WidthIndex.FIELD_NAME.value] - len(FIELD_NAME)) + 1),
-        TSDB_NAME,
-        infill(abs(widths[WidthIndex.TSDB_NAME.value] - len(TSDB_NAME)) + 1),
+        PLUGIN_INSTANCE_COLUMN_NAME,
+        infill(
+            widths[WidthIndex.PLUGIN_INSTANCE.value] - len(PLUGIN_INSTANCE_COLUMN_NAME)
+        ),
+        TYPE_INSTANCE_COLUMN_NAME,
+        infill(widths[WidthIndex.TYPE_INSTANCE.value] - len(TYPE_INSTANCE_COLUMN_NAME)),
+        ITEM_NAME_COLUMN_NAME,
+        infill(widths[WidthIndex.ITEM_NAME.value] - len(ITEM_NAME_COLUMN_NAME)),
+        FIELD_NAME_COLUMN_NAME,
+        infill(widths[WidthIndex.FIELD_NAME.value] - len(FIELD_NAME_COLUMN_NAME)),
+        TSDB_NAME_COLUMN_NAME,
+        infill(widths[WidthIndex.TSDB_NAME.value] - len(TSDB_NAME_COLUMN_NAME)),
     )
     for plugin_instance_name in list(plugin_instances):
         for element in plugin_instances[plugin_instance_name]:
             print(
                 plugin_instance_name,
                 infill(
-                    widths[WidthIndex.PLUGIN_INSTANCE.value]
-                    - len(plugin_instance_name)
-                    + 1
+                    abs(
+                        widths[WidthIndex.PLUGIN_INSTANCE.value]
+                        - len(plugin_instance_name)
+                    )
                 ),
                 element.type_instance,
                 infill(
-                    widths[WidthIndex.TYPE_INSTANCE.value]
-                    - len(element.type_instance)
-                    + 1
+                    abs(
+                        widths[WidthIndex.TYPE_INSTANCE.value]
+                        - len(element.type_instance)
+                    )
                 ),
                 element.item_name,
-                infill(widths[WidthIndex.ITEM_NAME.value] - len(element.item_name) + 1),
+                infill(
+                    abs(widths[WidthIndex.ITEM_NAME.value] - len(element.item_name))
+                ),
                 element.field_name,
                 infill(
-                    widths[WidthIndex.FIELD_NAME.value] - len(element.field_name) + 1
+                    abs(widths[WidthIndex.FIELD_NAME.value] - len(element.field_name))
                 ),
                 element.tsdb_name,
             )
@@ -271,6 +279,11 @@ def show_plugin_instances(plugin_instances, widths):
 
 def get_max_widths(plugin_instances):
     widths = [0, 0, 0, 0, 0]
+    widths[WidthIndex.PLUGIN_INSTANCE.value] = len(PLUGIN_INSTANCE_COLUMN_NAME)
+    widths[WidthIndex.TYPE_INSTANCE.value] = len(TYPE_INSTANCE_COLUMN_NAME)
+    widths[WidthIndex.ITEM_NAME.value] = len(ITEM_NAME_COLUMN_NAME)
+    widths[WidthIndex.FIELD_NAME.value] = len(FIELD_NAME_COLUMN_NAME)
+    widths[WidthIndex.TSDB_NAME.value] = len(TSDB_NAME_COLUMN_NAME)
     for plugin_instance_name in list(plugin_instances):
         for element in plugin_instances[plugin_instance_name]:
             set_widths(

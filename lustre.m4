@@ -206,8 +206,8 @@ define(`EXPORT_OST_STATS_ITEM_RW',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, exp_ost_stats_$2, 1)
 PATTERN($1 + 1, `$2_bytes +([[:digit:]]+) samples \[bytes\] [[:digit:]]+ [[:digit:]]+ ([[:digit:]]+)', 0)
-FIELD($1 + 1, 1, exp_ost_stats_$2_samples, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2_samples, exp_ost_stats_samples, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
-FIELD($1 + 1, 2, exp_ost_stats_$2_bytes, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, $2_bytes, exp_ost_stats_bytes, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)', $3)')dnl
+FIELD($1 + 1, 1, exp_ost_stats_$2_samples, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, exp_ost_stats_$2_samples, exp_ost_stats_samples, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)
+FIELD($1 + 1, 2, exp_ost_stats_$2_bytes, number, ${key:hostname}, ${subpath:ost_exp_client}-${subpath:ost_exp_type}_${subpath:fs_name}-${subpath:ost_index}, stats, derive, exp_ost_stats_$2_bytes, exp_ost_stats_bytes, optype=$2 exp_client=${subpath:ost_exp_client} exp_type=${subpath:ost_exp_type} fs_name=${subpath:fs_name} ost_index=${subpath:ost_index}, 0)', $3)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: additional items

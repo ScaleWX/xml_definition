@@ -228,51 +228,42 @@ def get_plugin_instances(definition, target="all"):
 
 def infill(number):
     str = ""
-    for _ in range(number + 1):
+    for _ in range(number + 2):
         str += " "
-    return str
+    print(str, end="")
+
+
+def print_line(
+    widths, plugin_instance, type_instance, item_name, field_name, tsdb_name
+):
+    print(plugin_instance, end="")
+    infill(widths[WidthIndex.PLUGIN_INSTANCE.value] - len(plugin_instance))
+    print(type_instance, end="")
+    infill(widths[WidthIndex.TYPE_INSTANCE.value] - len(type_instance))
+    print(item_name, end="")
+    infill(widths[WidthIndex.ITEM_NAME.value] - len(item_name))
+    print(field_name, end="")
+    infill(widths[WidthIndex.FIELD_NAME.value] - len(field_name))
+    print(tsdb_name)
 
 
 def show_plugin_instances(plugin_instances, widths):
-    print(
+    print_line(
+        widths,
         PLUGIN_INSTANCE_COLUMN_NAME,
-        infill(
-            widths[WidthIndex.PLUGIN_INSTANCE.value] - len(PLUGIN_INSTANCE_COLUMN_NAME)
-        ),
         TYPE_INSTANCE_COLUMN_NAME,
-        infill(widths[WidthIndex.TYPE_INSTANCE.value] - len(TYPE_INSTANCE_COLUMN_NAME)),
         ITEM_NAME_COLUMN_NAME,
-        infill(widths[WidthIndex.ITEM_NAME.value] - len(ITEM_NAME_COLUMN_NAME)),
         FIELD_NAME_COLUMN_NAME,
-        infill(widths[WidthIndex.FIELD_NAME.value] - len(FIELD_NAME_COLUMN_NAME)),
         TSDB_NAME_COLUMN_NAME,
-        infill(widths[WidthIndex.TSDB_NAME.value] - len(TSDB_NAME_COLUMN_NAME)),
     )
     for plugin_instance_name in list(plugin_instances):
         for element in plugin_instances[plugin_instance_name]:
-            print(
+            print_line(
+                widths,
                 plugin_instance_name,
-                infill(
-                    abs(
-                        widths[WidthIndex.PLUGIN_INSTANCE.value]
-                        - len(plugin_instance_name)
-                    )
-                ),
                 element.type_instance,
-                infill(
-                    abs(
-                        widths[WidthIndex.TYPE_INSTANCE.value]
-                        - len(element.type_instance)
-                    )
-                ),
                 element.item_name,
-                infill(
-                    abs(widths[WidthIndex.ITEM_NAME.value] - len(element.item_name))
-                ),
                 element.field_name,
-                infill(
-                    abs(widths[WidthIndex.FIELD_NAME.value] - len(element.field_name))
-                ),
                 element.tsdb_name,
             )
 

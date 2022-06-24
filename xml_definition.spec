@@ -40,6 +40,8 @@ mkdir -p %{buildroot}%{_sysconfdir}
 %{__install} -Dp -m0644 sfa-11.0.xml %{buildroot}%{_sysconfdir}/sfa-11.0_definition.xml
 %{__install} -Dp -m0644 sfa-11.6.xml %{buildroot}%{_sysconfdir}/sfa-11.6_definition.xml
 %{__install} -Dp -m0644 sfa-3.0.xml %{buildroot}%{_sysconfdir}/sfa-3.0_definition.xml
+%{__install} -Dp -m0644 Field_List-b_es5_2.txt %{buildroot}%{_sysconfdir}/Field_List-b_es5_2.txt
+%{__install} -Dp -m0644 Field_List-b_es6_0.txt %{buildroot}%{_sysconfdir}/Field_List-b_es6_0.txt
 
 %clean
 
@@ -70,6 +72,8 @@ mkdir -p %{buildroot}%{_sysconfdir}
 %{_sysconfdir}/sfa-11.0_definition.xml
 %{_sysconfdir}/sfa-11.6_definition.xml
 %{_sysconfdir}/sfa-3.0_definition.xml
+%{_sysconfdir}/Field_List-b_es5_2.txt
+%{_sysconfdir}/Field_List-b_es6_0.txt
 
 %changelog
 * Thu May 26 2022 Katsuhiko Ono <kono@ddn.com> - 1.0

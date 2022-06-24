@@ -36,7 +36,7 @@ $(XML_DESTINATION_FILES): $(M4_DESTINATION_FILES)
 	mv $@.tmp $@
 
 rpm: $(BUILD_DIRS) $(XML_DESTINATION_FILES)
-	tar Jcvf xml_definition.tar.xz *.xml
+	tar Jcvf xml_definition.tar.xz *.xml *.txt
 	mv xml_definition.tar.xz ./SOURCES
 	rpmbuild -ba --define="rev ${shell git rev-parse --short HEAD}" --define="_topdir $(shell pwd)" xml_definition.spec
 

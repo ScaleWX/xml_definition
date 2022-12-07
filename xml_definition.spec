@@ -1,6 +1,6 @@
 %define filedatadir /filedata
 
-Name:		xml_definition
+Name:		filedata_definition
 Version:	3.0.5
 Release:	1
 Summary:	XML definition files
@@ -9,7 +9,7 @@ License:	Share
 Packager:	Katsuhiko Ono <kono@ddn.com>
 Vendor:		ScaleWX
 URL:		https://github.com/ScaleWX/xml_definition
-Source0:	xml_definition.tar.xz
+Source0:	filedata_definition.tar.xz
 BuildArch:	noarch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 

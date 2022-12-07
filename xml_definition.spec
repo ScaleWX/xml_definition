@@ -1,7 +1,7 @@
 %define filedatadir /filedata
 
 Name:		xml_definition
-Version:	3.0.4
+Version:	3.0.5
 Release:	1
 Summary:	XML definition files
 Group:		Applications/ScaleWX

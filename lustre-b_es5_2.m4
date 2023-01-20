@@ -483,9 +483,15 @@ HEAD(Lustre-es5_2)
   statfs: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   sync: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   samedir_rename: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
-  parallel_rename_dir: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   parallel_rename_file: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
-  crossdir_rename: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }</pattern>
+  parallel_rename_dir: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
+  crossdir_rename: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
+  read: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
+  write: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
+  read_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
+  write_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
+  punch: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
+  migrate: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }</pattern>
 						JOBSTAT_FIELD(6, 1, job_id, string, derive, mdt, jobid, 1)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 2, open, number, mdt, 1)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 7, close, number, mdt, 1)
@@ -502,9 +508,15 @@ HEAD(Lustre-es5_2)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 62, statfs, number, mdt, 1)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 67, sync, number, mdt, 1)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 72, samedir_rename, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 77, parallel_rename_dir, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 82, parallel_rename_file, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 77, parallel_rename_file, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 82, parallel_rename_dir, number, mdt, 1)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 87, crossdir_rename, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 92, read, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 97, write, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 102, read_bytes, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 107, write_bytes, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 112, punch, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 117, migrate, number, mdt, 1)
 					</item>
 				</entry>
 			</entry>

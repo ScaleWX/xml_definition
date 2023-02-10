@@ -3,6 +3,7 @@ SUBDIRS = .
 BUILD_DIRS = BUILD BUILDROOT RPMS SOURCES SPECS SRPMS
 
 M4_DESTINATION_FILES = exa-5.2.6.m4 \
+	exa-5.2.7.m4 \
 	ime-1.1.m4 \
 	ime-1.2.m4 \
 	infiniband-0.1.m4 \

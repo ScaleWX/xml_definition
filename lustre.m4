@@ -1692,3 +1692,21 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 		</entry>
 	</entry>
 ')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of MB_ALLOC_STATS_ITEM
+dnl $3: is first child of parent definition
+define(`MB_ALLOC_STATS_ITEM',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, mb_alloc_stats_$2, 1)
+PATTERN($1 + 1, `\s+$2: +([[:digit:]]+)', 0)
+FIELD($1 + 1, 1, mb_alloc_stats_$2, number, ${key:hostname}, ldiskfs-${subpath:dev_name}, mb_alloc_stats, derive, mb_alloc_stats_$2, mb_alloc_stats, optype=$2 dev_name=${subpath:dev_name}, 0)', $3)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of MB_ALLOC_STATS_ITEM
+dnl $3: is first child of parent definition
+define(`MB_ALLOC_STATS_PO2_HITS',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, mb_alloc_stats_$2, 1)
+PATTERN($1 + 1, `\s+2\^n_hits: +([[:digit:]]+)', 0)
+FIELD($1 + 1, 1, mb_alloc_stats_$2, number, ${key:hostname}, ldiskfs-${subpath:dev_name}, mb_alloc_stats, derive, mb_alloc_stats_$2, mb_alloc_stats, optype=$2 dev_name=${subpath:dev_name}, 0)', $3)')dnl

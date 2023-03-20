@@ -1173,5 +1173,45 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 			</entry>
 		</entry>
 	</entry>
+	<entry>
+		<subpath>
+			<subpath_type>constant</subpath_type>
+			<path>/proc/fs/ldiskfs</path>
+		</subpath>
+		<mode>directory</mode>
+		<entry>
+			<subpath>
+				<subpath_type>regular_expression</subpath_type>
+				<path>(^\w+$)</path>
+				<subpath_field>
+					<index>1</index>
+					<name>dev_name</name>
+				</subpath_field>
+			</subpath>
+			<mode>directory</mode>
+			<entry>
+				SUBPATH(4, constant, mb_alloc_stats, 1)
+				MODE(4, file, 1)
+				MB_ALLOC_STATS_ITEM(4, blocks, 1)
+				MB_ALLOC_STATS_ITEM(4, reqs, 1)
+				MB_ALLOC_STATS_ITEM(4, success, 1)
+				MB_ALLOC_STATS_ITEM(4, extents_scanned, 1)
+				MB_ALLOC_STATS_ITEM(4, goal_hits, 1)
+				MB_ALLOC_STATS_PO2_HITS(4, 2^n_hits, 1)
+				MB_ALLOC_STATS_ITEM(4, breaks, 1)
+				MB_ALLOC_STATS_ITEM(4, lost, 1)
+				MB_ALLOC_STATS_ITEM(4, useless_c1_loops, 1)
+				MB_ALLOC_STATS_ITEM(4, useless_c2_loops, 1)
+				MB_ALLOC_STATS_ITEM(4, useless_c3_loops, 1)
+				MB_ALLOC_STATS_ITEM(4, skipped_c1_loops, 1)
+				MB_ALLOC_STATS_ITEM(4, skipped_c2_loops, 1)
+				MB_ALLOC_STATS_ITEM(4, skipped_c3_loops, 1)
+				MB_ALLOC_STATS_ITEM(4, buddies_generated, 1)
+				MB_ALLOC_STATS_ITEM(4, buddies_time_used, 1)
+				MB_ALLOC_STATS_ITEM(4, preallocated, 1)
+				MB_ALLOC_STATS_ITEM(4, discarded, 1)
+			</entry>
+		</entry>
+	</entry>
 </definition>
 

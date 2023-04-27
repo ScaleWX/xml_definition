@@ -448,6 +448,8 @@ HEAD(Lustre-es5_2)
 					MD_STATS_ITEM_V2(5, setxattr, 1)
 					MD_STATS_ITEM_V2(5, statfs, 1)
 					MD_STATS_ITEM_V2(5, sync, 1)
+					MD_STATS_ITEM_V2(5, samedir_rename, 1)
+					MD_STATS_ITEM_V2(5, crossdir_rename, 1)
 				</entry>
 				<entry>
 					SUBPATH(5, constant, exports, 1)
@@ -1174,4 +1176,3 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 		</entry>
 	</entry>
 </definition>
-

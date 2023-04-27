@@ -22,6 +22,7 @@ This package includes XML definition files for system information collection dae
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
+%{__install} -Dp -m0644 exa-5.2.5.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 exa-5.2.6.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 exa-5.2.7.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 ime-1.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}
@@ -56,6 +57,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 
 %files
 %defattr(-,root,root,-)
+%{_sysconfdir}%{filedatadir}/exa-5.2.5.xml
 %{_sysconfdir}%{filedatadir}/exa-5.2.6.xml
 %{_sysconfdir}%{filedatadir}/exa-5.2.7.xml
 %{_sysconfdir}%{filedatadir}/ime-1.1.xml

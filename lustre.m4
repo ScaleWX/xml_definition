@@ -13,7 +13,7 @@ dnl $5: field type
 dnl $6: host OPTION
 dnl $7: plugin OPTION
 dnl $8: plugin_instance OPTION
-dnl $9: type OPTION 
+dnl $9: type OPTION
 dnl $10: type_instance OPTION
 dnl $11: tsdb_name OPTION
 dnl $12: tsdb_tags OPTION
@@ -73,7 +73,7 @@ dnl $4: match pattern RegEx str
 dnl $5: type of item
 dnl $6: is first child of parent definition
 define(`RECOVERY_STATUS_ITEM',
-	`ELEMENT($1, item, 
+	`ELEMENT($1, item,
 	`NAME($1 + 1, $3_recovery_status_$2, 1)
 PATTERN($1 + 1, `$2: +$4', 0)
 FIELD($1 + 1, 1, $2, $5, ${key:hostname}, ${subpath:fs_name}-${subpath:$3_index}, $3_recovery_status, gauge, $2, $3_recovery_status, optype=$2 fs_name=${subpath:fs_name} $3_index=${subpath:$3_index}, 0)', $6)')dnl
@@ -83,7 +83,7 @@ dnl $2: name of RECOVERY_STATUS_CONNECTED_ITEM
 dnl $3: "mdt" or "ost"
 dnl $4: is first child of parent definition
 define(`RECOVERY_STATUS_CONNECTED_ITEM',
-	`ELEMENT($1, item, 
+	`ELEMENT($1, item,
 	`NAME($1 + 1, $3_recovery_status_$2, 1)
 PATTERN($1 + 1, `$2: +([[:digit:]]+)\/([[:digit:]]+)', 0)
 FIELD($1 + 1, 1, connected_clients, number, ${key:hostname}, ${subpath:fs_name}-${subpath:$3_index}, $3_recovery_status, gauge, connected_clients, $3_recovery_status, optype=connected_clients fs_name=${subpath:fs_name} $3_index=${subpath:$3_index}, 0)
@@ -93,7 +93,7 @@ dnl $1: number of INDENT
 dnl $2: name of MD_STATS_ITEM
 dnl $3: is first child of parent definition
 define(`MD_STATS_ITEM',
-	`ELEMENT($1, item, 
+	`ELEMENT($1, item,
 	`NAME($1 + 1, md_stats_$2, 1)
 PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples .+', 0)
 FIELD($1 + 1, 1, $2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats, derive, $2, md_stats, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)', $3)')dnl
@@ -102,9 +102,9 @@ dnl $1: number of INDENT
 dnl $2: name of MD_STATS_ITEM_V2
 dnl $3: is first child of parent definition
 define(`MD_STATS_ITEM_V2',
-	`ELEMENT($1, item, 
+	`ELEMENT($1, item,
 	`NAME($1 + 1, md_stats_$2, 1)
-PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[usecs\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
+PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[usecs\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
 FIELD($1 + 1, 1, md_stats_$2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats, derive, md_stats_$2, md_stats, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
 FIELD($1 + 1, 2, md_stats_$2_min, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_min, derive, md_stats_$2_min, md_stats_min, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
 FIELD($1 + 1, 3, md_stats_$2_max, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_max, derive, md_stats_$2_max, md_stats_max, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
@@ -161,7 +161,7 @@ FIELD($1 + 1, 5, ost_stats_$2_sumsq, number, ${key:hostname}, ${subpath:fs_name}
 dnl
 dnl $1: number of INDENT
 dnl $2: name of OST_STATS_ITEM
-dnl $3: type of item 
+dnl $3: type of item
 dnl $4: is first child of parent definition
 define(`OST_STATS_ITEM',
 	`OST_STATS_ITEM_PREFIX($1, $2, $2, $3, $4)')dnl

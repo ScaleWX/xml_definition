@@ -295,6 +295,36 @@ HEAD(Lustre-es5_2)
 							OST_ACCTPROJECT_FIELD(7, 3, usage_kbytes, number, gauge, 1)
 						</item>
 					</entry>
+					<entry>
+						SUBPATH(6, constant, limit_user, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>ost_quota_limit_user</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							OST_QUOTA_LIMIT_ITEM(7, user)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, limit_group, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>ost_quota_limit_group</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							OST_QUOTA_LIMIT_ITEM(7, group)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, limit_project, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>ost_quota_limit_project</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							OST_QUOTA_LIMIT_ITEM(7, project)
+						</item>
+					</entry>
 				</entry>
 			</entry>
 		</entry>
@@ -1200,4 +1230,3 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 		</entry>
 	</entry>
 </definition>
-

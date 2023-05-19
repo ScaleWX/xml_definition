@@ -1692,3 +1692,21 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 		</entry>
 	</entry>
 ')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: kind of Limit Items
+define(`MDT_QUOTA_LIMIT_ITEM',
+	`FIELD($1, 1, id, string, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, quota_limit_$2_${content:id}, gauge, id, mdt_quota_limit_$2_samples, optype=id fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} $2_id=${content:id}, 1)
+FIELD($1, 2, hard, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, quota_limit_$2_${content:id}, gauge, hard, mdt_quota_limit_$2_samples, optype=hard fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} $2_id=${content:id}, 0)
+FIELD($1, 3, soft, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, quota_limit_$2_${content:id}, gauge, soft, mdt_quota_limit_$2_samples, optype=soft fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} $2_id=${content:id}, 0)
+FIELD($1, 4, granted, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, quota_limit_$2_${content:id}, gauge, granted, mdt_quota_limit_$2_samples, optype=granted fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} $2_id=${content:id}, 0)
+FIELD($1, 5, time, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, quota_limit_$2_${content:id}, gauge, time, mdt_quota_limit_$2_samples, optype=time fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} $2_id=${content:id}, 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: kind of Limit Items
+define(`OST_QUOTA_LIMIT_ITEM',
+	`FIELD($1, 1, id, string, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, quota_limit_$2_${content:id}, gauge, id, ost_quota_limit_$2_samples, optype=id fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} $2_id=${content:id}, 1)
+FIELD($1, 2, hard, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, quota_limit_$2_${content:id}, gauge, hard, ost_quota_limit_$2_samples, optype=hard fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} $2_id=${content:id}, 0)
+FIELD($1, 3, soft, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, quota_limit_$2_${content:id}, gauge, soft, ost_quota_limit_$2_samples, optype=soft fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} $2_id=${content:id}, 0)
+FIELD($1, 4, granted, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, quota_limit_$2_${content:id}, gauge, granted, ost_quota_limit_$2_samples, optype=granted fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} $2_id=${content:id}, 0)
+FIELD($1, 5, time, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, quota_limit_$2_${content:id}, gauge, time, ost_quota_limit_$2_samples, optype=time fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} $2_id=${content:id}, 0)')dnl

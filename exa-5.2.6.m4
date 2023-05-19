@@ -181,6 +181,36 @@ HEAD(Lustre-es5_2)
 							MDT_ACCTPROJECT_FIELD(7, 3, usage_kbytes, number, gauge, 1)
 						</item>
 					</entry>
+					<entry>
+						SUBPATH(6, constant, limit_user, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>mdt_quota_limit_user</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							MDT_QUOTA_LIMIT_ITEM(7, user)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, limit_group, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>mdt_quota_limit_group</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							MDT_QUOTA_LIMIT_ITEM(7, group)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, limit_project, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>mdt_quota_limit_project</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							MDT_QUOTA_LIMIT_ITEM(7, project)
+						</item>
+					</entry>
 				</entry>
 			</entry>
 			<entry>
@@ -263,6 +293,36 @@ HEAD(Lustre-es5_2)
 							OST_ACCTPROJECT_FIELD(7, 1, id, string, gauge, 1)
 							OST_ACCTPROJECT_FIELD(7, 2, usage_inodes, number, gauge, 1)
 							OST_ACCTPROJECT_FIELD(7, 3, usage_kbytes, number, gauge, 1)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, limit_user, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>ost_quota_limit_user</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							OST_QUOTA_LIMIT_ITEM(7, user)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, limit_group, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>ost_quota_limit_group</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							OST_QUOTA_LIMIT_ITEM(7, group)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, limit_project, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>ost_quota_limit_project</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							OST_QUOTA_LIMIT_ITEM(7, project)
 						</item>
 					</entry>
 				</entry>
@@ -1170,4 +1230,3 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 		</entry>
 	</entry>
 </definition>
-

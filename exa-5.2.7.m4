@@ -509,6 +509,8 @@ HEAD(Lustre-es5_2)
 					MD_STATS_ITEM_V2(5, statfs, 1)
 					MD_STATS_ITEM_V2(5, sync, 1)
 					MD_STATS_ITEM_V2(5, samedir_rename, 1)
+					MD_STATS_ITEM_V2(5, parallel_rename_dir, 1)
+					MD_STATS_ITEM_V2(5, parallel_rename_file, 1)
 					MD_STATS_ITEM_V2(5, crossdir_rename, 1)
 				</entry>
 				<entry>

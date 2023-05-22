@@ -181,36 +181,6 @@ HEAD(Lustre-es5_2)
 							MDT_ACCTPROJECT_FIELD(7, 3, usage_kbytes, number, gauge, 1)
 						</item>
 					</entry>
-					<entry>
-						SUBPATH(6, constant, limit_user, 1)
-						MODE(6, file, 1)
-						<item>
-							<name>mdt_quota_limit_user</name>
-							<pattern>- +id: +(.+)
-  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							MDT_QUOTA_LIMIT_ITEM(7, user)
-						</item>
-					</entry>
-					<entry>
-						SUBPATH(6, constant, limit_group, 1)
-						MODE(6, file, 1)
-						<item>
-							<name>mdt_quota_limit_group</name>
-							<pattern>- +id: +(.+)
-  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							MDT_QUOTA_LIMIT_ITEM(7, group)
-						</item>
-					</entry>
-					<entry>
-						SUBPATH(6, constant, limit_project, 1)
-						MODE(6, file, 1)
-						<item>
-							<name>mdt_quota_limit_project</name>
-							<pattern>- +id: +(.+)
-  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							MDT_QUOTA_LIMIT_ITEM(7, project)
-						</item>
-					</entry>
 				</entry>
 			</entry>
 			<entry>
@@ -293,36 +263,6 @@ HEAD(Lustre-es5_2)
 							OST_ACCTPROJECT_FIELD(7, 1, id, string, gauge, 1)
 							OST_ACCTPROJECT_FIELD(7, 2, usage_inodes, number, gauge, 1)
 							OST_ACCTPROJECT_FIELD(7, 3, usage_kbytes, number, gauge, 1)
-						</item>
-					</entry>
-					<entry>
-						SUBPATH(6, constant, limit_user, 1)
-						MODE(6, file, 1)
-						<item>
-							<name>ost_quota_limit_user</name>
-							<pattern>- +id: +(.+)
-  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							OST_QUOTA_LIMIT_ITEM(7, user)
-						</item>
-					</entry>
-					<entry>
-						SUBPATH(6, constant, limit_group, 1)
-						MODE(6, file, 1)
-						<item>
-							<name>ost_quota_limit_group</name>
-							<pattern>- +id: +(.+)
-  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							OST_QUOTA_LIMIT_ITEM(7, group)
-						</item>
-					</entry>
-					<entry>
-						SUBPATH(6, constant, limit_project, 1)
-						MODE(6, file, 1)
-						<item>
-							<name>ost_quota_limit_project</name>
-							<pattern>- +id: +(.+)
-  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							OST_QUOTA_LIMIT_ITEM(7, project)
 						</item>
 					</entry>
 				</entry>
@@ -509,8 +449,6 @@ HEAD(Lustre-es5_2)
 					MD_STATS_ITEM_V2(5, statfs, 1)
 					MD_STATS_ITEM_V2(5, sync, 1)
 					MD_STATS_ITEM_V2(5, samedir_rename, 1)
-					MD_STATS_ITEM_V2(5, parallel_rename_dir, 1)
-					MD_STATS_ITEM_V2(5, parallel_rename_file, 1)
 					MD_STATS_ITEM_V2(5, crossdir_rename, 1)
 				</entry>
 				<entry>
@@ -547,8 +485,6 @@ HEAD(Lustre-es5_2)
   statfs: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   sync: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   samedir_rename: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
-  parallel_rename_dir: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
-  parallel_rename_file: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   crossdir_rename: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   read_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   write_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
@@ -569,12 +505,10 @@ HEAD(Lustre-es5_2)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 62, statfs, number, mdt, 1)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 67, sync, number, mdt, 1)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 72, samedir_rename, number, mdt, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 77, parallel_rename_dir, number, mdt, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 82, parallel_rename_file, number, mdt, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 87, crossdir_rename, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 92, read_bytes, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 97, write_bytes, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 102, punch, number, mdt, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 77, crossdir_rename, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 82, read_bytes, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 87, write_bytes, number, mdt, 1)
+            JOBSTAT_FIELD_META_OPERATIONS(6, 92, punch, number, mdt, 1)
 					</item>
 				</entry>
 			</entry>

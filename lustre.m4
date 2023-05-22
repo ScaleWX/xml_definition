@@ -104,7 +104,7 @@ dnl $3: is first child of parent definition
 define(`MD_STATS_ITEM_V2',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, md_stats_$2, 1)
-PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[usecs\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
+PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[usecs\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
 FIELD($1 + 1, 1, md_stats_$2, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats, derive, md_stats_$2, md_stats, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
 FIELD($1 + 1, 2, md_stats_$2_min, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_min, derive, md_stats_$2_min, md_stats_min, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
 FIELD($1 + 1, 3, md_stats_$2_max, number, ${key:hostname}, ${subpath:fs_name}-${subpath:mdt_index}, md_stats_max, derive, md_stats_$2_max, md_stats_max, optype=$2 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)

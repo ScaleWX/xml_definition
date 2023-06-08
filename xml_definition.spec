@@ -43,6 +43,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-ieel-2.7.xml %{buildroot}%{_sysconfdir}%{filedatadir}/lustre-ieel-2.7_definition.xml
 %{__install} -Dp -m0644 sfa-11.0.xml %{buildroot}%{_sysconfdir}%{filedatadir}/sfa-11.0_definition.xml
 %{__install} -Dp -m0644 sfa-11.6.xml %{buildroot}%{_sysconfdir}%{filedatadir}/sfa-11.6_definition.xml
+%{__install} -Dp -m0644 sfa-12.2.xml %{buildroot}%{_sysconfdir}%{filedatadir}/sfa-12.2_definition.xml
 %{__install} -Dp -m0644 sfa-3.0.xml %{buildroot}%{_sysconfdir}%{filedatadir}/sfa-3.0_definition.xml
 %{__install} -Dp -m0644 Field_List-b_es5_2.txt %{buildroot}%{_sysconfdir}%{filedatadir}/Field_List-b_es5_2.txt
 %{__install} -Dp -m0644 Field_List-b_es6_0.txt %{buildroot}%{_sysconfdir}%{filedatadir}/Field_List-b_es6_0.txt
@@ -78,6 +79,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{_sysconfdir}%{filedatadir}/lustre-ieel-2.7_definition.xml
 %{_sysconfdir}%{filedatadir}/sfa-11.0_definition.xml
 %{_sysconfdir}%{filedatadir}/sfa-11.6_definition.xml
+%{_sysconfdir}%{filedatadir}/sfa-12.2_definition.xml
 %{_sysconfdir}%{filedatadir}/sfa-3.0_definition.xml
 %{_sysconfdir}%{filedatadir}/Field_List-b_es5_2.txt
 %{_sysconfdir}%{filedatadir}/Field_List-b_es6_0.txt

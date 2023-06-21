@@ -506,6 +506,10 @@ HEAD(Lustre-es6_0)
 					MD_STATS_ITEM_V2(5, setxattr, 1)
 					MD_STATS_ITEM_V2(5, statfs, 1)
 					MD_STATS_ITEM_V2(5, sync, 1)
+					MD_STATS_ITEM_V2(5, samedir_rename, 1)
+					MD_STATS_ITEM_V2(5, parallel_rename_dir, 1)
+					MD_STATS_ITEM_V2(5, parallel_rename_file, 1)
+					MD_STATS_ITEM_V2(5, crossdir_rename, 1)
 				</entry>
 				<entry>
 					SUBPATH(5, constant, exports, 1)
@@ -526,6 +530,8 @@ HEAD(Lustre-es6_0)
 						<name>mdt_jobstats</name>
 						<pattern>- +job_id: +(.+)
  +snapshot_time: +.+
+ +start_time: +.+
+ +elapsed_time: +.+
   open: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   close: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   mknod: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
@@ -546,8 +552,8 @@ HEAD(Lustre-es6_0)
   crossdir_rename: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   read: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   write: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
-  read_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
-  write_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
+  read_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+).+ }
+  write_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+).+ }
   punch: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   migrate: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }</pattern>
 						JOBSTAT_FIELD(6, 1, job_id, string, derive, mdt, jobid, 1)
@@ -566,15 +572,15 @@ HEAD(Lustre-es6_0)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 62, statfs, number, mdt, 1)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 67, sync, number, mdt, 1)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 72, samedir_rename, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 77, parallel_rename_file, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 82, parallel_rename_dir, number, mdt, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 77, parallel_rename_file, number, mdt, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 82, parallel_rename_dir, number, mdt, 1)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 87, crossdir_rename, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 92, read, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 97, write, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 102, read_bytes, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 107, write_bytes, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 112, punch, number, mdt, 1)
-            JOBSTAT_FIELD_META_OPERATIONS(6, 117, migrate, number, mdt, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 92, read, number, mdt, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 97, write, number, mdt, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 102, read_bytes, number, mdt, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 107, write_bytes, number, mdt, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 112, punch, number, mdt, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 117, migrate, number, mdt, 1)
 					</item>
 				</entry>
 			</entry>
@@ -659,8 +665,10 @@ HEAD(Lustre-es6_0)
 						<name>ost_jobstats</name>
 						<pattern>- +job_id: +(.+)
  +snapshot_time: +.+
-  read_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+).+ }
-  write_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+).+ }
+ +start_time: +.+
+ +elapsed_time: +.+
+  read_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+).+ }
+  write_bytes: +\{ samples: +([[:digit:]]+), unit: bytes, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+).+ }
   read: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   write: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   getattr: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
@@ -672,28 +680,32 @@ HEAD(Lustre-es6_0)
   statfs: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   get_info: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
   set_info: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
-  quotactl: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }</pattern>
+  quotactl: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }
+  prealloc: +\{ samples: +([[:digit:]]+), unit: usecs, min: *([[:digit:]]+), max: *([[:digit:]]+), sum: *([[:digit:]]+), sumsq: *([[:digit:]]+) }</pattern>
 						JOBSTAT_FIELD(6, 1, job_id, string, derive, ost, jobid, 1)
 						OST_JOBSTAT_FIELD(6, 2, read_samples, number, derive, 1)
 						OST_JOBSTAT_FIELD_BYTES(6, 3, min_read_bytes, number, gauge, 1)
 						OST_JOBSTAT_FIELD_BYTES(6, 4, max_read_bytes, number, gauge, 1)
 						OST_JOBSTAT_FIELD_BYTES(6, 5, sum_read_bytes, number, derive, 1)
-						OST_JOBSTAT_FIELD(6, 6, write_samples, number, derive, 1)
-						OST_JOBSTAT_FIELD_BYTES(6, 7, min_write_bytes, number, gauge, 1)
-						OST_JOBSTAT_FIELD_BYTES(6, 8, max_write_bytes, number, gauge, 1)
-						OST_JOBSTAT_FIELD_BYTES(6, 9, sum_write_bytes, number, derive, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 10, read, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 15, write, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 20, getattr, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 25, setattr, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 30, punch, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 35, sync, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 40, destroy, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 45, create, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 50, statfs, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 55, get_info, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 60, set_info, number, ost, 1)
-						JOBSTAT_FIELD_META_OPERATIONS(6, 65, quotactl, number, ost, 1)
+						OST_JOBSTAT_FIELD_BYTES(6, 6, sumsq_read_bytes, number, derive, 1)
+						OST_JOBSTAT_FIELD(6, 7, write_samples, number, derive, 1)
+						OST_JOBSTAT_FIELD_BYTES(6, 8, min_write_bytes, number, gauge, 1)
+						OST_JOBSTAT_FIELD_BYTES(6, 9, max_write_bytes, number, gauge, 1)
+						OST_JOBSTAT_FIELD_BYTES(6, 10, sum_write_bytes, number, derive, 1)
+						OST_JOBSTAT_FIELD_BYTES(6, 11, sumsq_write_bytes, number, derive, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 12, read, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 17, write, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 22, getattr, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 27, setattr, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 32, punch, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 37, sync, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 42, destroy, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 47, create, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 52, statfs, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 57, get_info, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 62, set_info, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 67, quotactl, number, ost, 1)
+						JOBSTAT_FIELD_META_OPERATIONS(6, 72, prealloc, number, ost, 1)
 					</item>
 				</entry>
 			</entry>

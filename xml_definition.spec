@@ -25,6 +25,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 exa-5.2.5.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 exa-5.2.6.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 exa-5.2.7.xml %{buildroot}%{_sysconfdir}%{filedatadir}
+%{__install} -Dp -m0644 exa-6.2.0.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 ime-1.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 ime-1.2.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 infiniband-0.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}/infiniband-0.1_definition.xml
@@ -37,7 +38,6 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.5.xml %{buildroot}%{_sysconfdir}%{filedatadir}/lustre-2.5_definition.xml
 %{__install} -Dp -m0644 lustre-b_es5_1.xml %{buildroot}%{_sysconfdir}%{filedatadir}/lustre-b_es5_1.xml
 %{__install} -Dp -m0644 lustre-b_es5_2.xml %{buildroot}%{_sysconfdir}%{filedatadir}/lustre-b_es5_2.xml
-%{__install} -Dp -m0644 lustre-b_es6_0.xml %{buildroot}%{_sysconfdir}%{filedatadir}/lustre-b_es6_0.xml
 %{__install} -Dp -m0644 lustre-es4-2.10.xml %{buildroot}%{_sysconfdir}%{filedatadir}/lustre-es4-2.10.xml
 %{__install} -Dp -m0644 lustre-ieel-2.5.xml %{buildroot}%{_sysconfdir}%{filedatadir}/lustre-ieel-2.5_definition.xml
 %{__install} -Dp -m0644 lustre-ieel-2.7.xml %{buildroot}%{_sysconfdir}%{filedatadir}/lustre-ieel-2.7_definition.xml
@@ -60,6 +60,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{_sysconfdir}%{filedatadir}/exa-5.2.5.xml
 %{_sysconfdir}%{filedatadir}/exa-5.2.6.xml
 %{_sysconfdir}%{filedatadir}/exa-5.2.7.xml
+%{_sysconfdir}%{filedatadir}/exa-6.2.0.xml
 %{_sysconfdir}%{filedatadir}/ime-1.1.xml
 %{_sysconfdir}%{filedatadir}/ime-1.2.xml
 %{_sysconfdir}%{filedatadir}/infiniband-0.1_definition.xml
@@ -72,7 +73,6 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{_sysconfdir}%{filedatadir}/lustre-2.5_definition.xml
 %{_sysconfdir}%{filedatadir}/lustre-b_es5_1.xml
 %{_sysconfdir}%{filedatadir}/lustre-b_es5_2.xml
-%{_sysconfdir}%{filedatadir}/lustre-b_es6_0.xml
 %{_sysconfdir}%{filedatadir}/lustre-es4-2.10.xml
 %{_sysconfdir}%{filedatadir}/lustre-ieel-2.5_definition.xml
 %{_sysconfdir}%{filedatadir}/lustre-ieel-2.7_definition.xml

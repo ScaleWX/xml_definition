@@ -2,7 +2,7 @@
 import argparse
 import xml.etree.ElementTree as ET
 from enum import Enum
-from os import path
+import os
 
 
 class Definition:
@@ -53,6 +53,15 @@ ITEM_NAME_COLUMN_NAME = "Item Name"
 FIELD_NAME_COLUMN_NAME = "Field Name"
 TSDB_NAME_COLUMN_NAME = "TSDB Name"
 
+FILEDATA_TAG = '<Plugin "filedata">'
+FILEDATA_END_TAG = "</Plugin>"
+COMMON_TAG = "<Common>"
+COMMON_END_TAG = "</Common>"
+DEFINITION_FILE = "DefinitionFile"
+ITEM_TAG = "<Item>"
+ITEM_END_TAG = "</Item>"
+TYPE_ATTR = "Type"
+
 
 class WidthIndex(Enum):
     PLUGIN_INSTANCE = 0
@@ -101,7 +110,7 @@ def parse_item(item, path):
 
 def parse_entry(entry, parent_path, definition):
     subpath = entry.find("subpath")
-    full_path = path.join(parent_path, subpath.find("path").text)
+    full_path = os.path.join(parent_path, subpath.find("path").text)
     mode = entry.find("mode").text
     if mode == "directory":
         for child in entry.findall("entry"):
@@ -169,6 +178,21 @@ def show_item(definition, requested_item, verbose):
                     print_field(field)
                 else:
                     print_main_field(field)
+
+
+def generate_config(definition, abspath, indent):
+    indentation = ""
+    for _ in range(int(indent)):
+        indentation += " "
+    print(FILEDATA_TAG)
+    print(f"{indentation}{COMMON_TAG}")
+    print(f'{indentation}{indentation}{DEFINITION_FILE} "{abspath}"')
+    print(f"{indentation}{COMMON_END_TAG}")
+    for item in definition.items:
+        print(f"{indentation}{ITEM_TAG}")
+        print(f'{indentation}{indentation}Type "{item.name}"')
+        print(f"{indentation}{ITEM_END_TAG}")
+    print(FILEDATA_END_TAG)
 
 
 def is_max(current, previous):
@@ -360,12 +384,27 @@ def main():
         default="all",
         help="Specify the plugin instance definition to be shown",
     )
+    parser.add_argument(
+        "--generate",
+        "-g",
+        default="no",
+        help="Generate configuration file for collectd",
+    )
+    parser.add_argument(
+        "--indent",
+        "-d",
+        default="4",
+        help="Specify the indent used for config generated",
+    )
     args = parser.parse_args()
     definition_xml = ET.parse(args.definition_file).getroot()
     definition = Definition()
     parse_definition(definition_xml, definition)
     if args.check == "yes":
         check_type_instance_duplication(definition)
+    elif args.generate == "yes":
+        abspath = os.path.abspath(args.definition_file)
+        generate_config(definition, abspath, args.indent)
     elif args.item != "none":
         if args.item == "all":
             show_all_items(definition, args.verbose)

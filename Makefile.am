@@ -24,7 +24,8 @@ M4_DESTINATION_FILES = exa-5.2.5.m4 \
 	lustre-2.13.m4 \
 	sfa-3.0.m4 \
 	sfa-11.0.m4 \
-	sfa-11.6.m4
+	sfa-11.6.m4 \
+	sfa-12.2.m4
 
 
 M4_FILES = general.m4 lustre.m4 sfa.m4 $(M4_DESTINATION_FILES)

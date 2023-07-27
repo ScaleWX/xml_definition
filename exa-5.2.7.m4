@@ -1259,6 +1259,57 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 				</entry>
 			</entry>
 		</entry>
+		<entry>
+			<subpath>
+				<subpath_type>constant</subpath_type>
+				<path>osc</path>
+			</subpath>
+			<mode>directory</mode>
+			<entry>
+				<subpath>
+					<subpath_type>regular_expression</subpath_type>
+					<path>(^.+)-(OST[0-9a-fA-F]+)-osc-([0-9a-fA-F]+$)</path>
+					<subpath_field>
+						<index>1</index>
+						<name>fs_name</name>
+					</subpath_field>
+					<subpath_field>
+						<index>2</index>
+						<name>ost_index</name>
+					</subpath_field>
+					<subpath_field>
+						<index>3</index>
+						<name>client_uuid</name>
+					</subpath_field>
+				</subpath>
+				<mode>directory</mode>
+				<entry>
+					<subpath>
+						<subpath_type>constant</subpath_type>
+						<path>stats</path>
+					</subpath>
+					<mode>file</mode>
+					<write_after_read>0</write_after_read>
+					CLIENT_OSC_STATS_ITEM(5, req_waittime, usec)
+					CLIENT_OSC_STATS_ITEM(5, req_active, reqs)
+					CLIENT_OSC_STATS_ITEM(5, ldlm_glimpse_enqueue, reqs)
+					CLIENT_OSC_STATS_ITEM(5, ldlm_extent_enqueue, reqs)
+					CLIENT_OSC_STATS_ITEM(5, read_bytes, bytes)
+					CLIENT_OSC_STATS_ITEM(5, write_bytes, bytes)
+					CLIENT_OSC_STATS_ITEM(5, ost_getattr, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_setattr, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_read, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_write, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_connect, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_disconnect, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_punch, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_sync, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_set_info, usec)
+					CLIENT_OSC_STATS_ITEM(5, ldlm_cancel, usec)
+					CLIENT_OSC_STATS_ITEM(5, obd_ping, usec)
+				</entry>
+			</entry>
+		</entry>
 	</entry>
 	<entry>
 		<subpath>

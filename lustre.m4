@@ -647,26 +647,6 @@ dnl $4: kind of FIELD
 dnl $5: type of FIELD
 dnl $6: type OPTION
 dnl $7: kind of STATS
-define(`CLIENT_STATS_MDT_ITEM_FIELD',
-	`ELEMENT($1, field,
-	`INDEX($1 + 1, $2, 1)
-NAME($1 + 1, $3_$4, 0)
-TYPE($1 + 1, $5, 0)
-OPTION($1 + 1, host, ${key:hostname}, 0)
-OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:client_uuid}, 0)
-OPTION($1 + 1, plugin_instance, client_stats, 0)
-OPTION($1 + 1, type, $6, 0)
-OPTION($1 + 1, type_instance, $3_$4, 0)
-OPTION($1 + 1, tsdb_name, $7_stats_$4, 0)
-OPTION($1 + 1, tsdb_tags, optype=$3_$4 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
-dnl
-dnl $1: number of INDENT
-dnl $2: index of FIELD
-dnl $3: name of ITEM
-dnl $4: kind of FIELD
-dnl $5: type of FIELD
-dnl $6: type OPTION
-dnl $7: kind of STATS
 define(`CLIENT_STATS_ITEM_FIELD',
 	`ELEMENT($1, field,
 	`INDEX($1 + 1, $2, 1)
@@ -716,17 +696,68 @@ CLIENT_STATS_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive, llite)
 CLIENT_STATS_ITEM_FIELD($1 + 1, 5, $2, sumsq, number, derive, llite)', 1)')dnl
 dnl
 dnl $1: number of INDENT
+dnl $2: index of FIELD
+dnl $3: name of ITEM
+dnl $4: kind of FIELD
+dnl $5: type of FIELD
+dnl $6: type OPTION
+define(`CLIENT_STATS_MDC_ITEM_FIELD',
+	`ELEMENT($1, field,
+	`INDEX($1 + 1, $2, 1)
+NAME($1 + 1, $3_$4, 0)
+TYPE($1 + 1, $5, 0)
+OPTION($1 + 1, host, ${key:hostname}, 0)
+OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:client_uuid}, 0)
+OPTION($1 + 1, plugin_instance, client_stats, 0)
+OPTION($1 + 1, type, $6, 0)
+OPTION($1 + 1, type_instance, $3_$4, 0)
+OPTION($1 + 1, tsdb_name, mdc_stats_$4, 0)
+OPTION($1 + 1, tsdb_tags, optype=$3_$4 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
+dnl
+dnl $1: number of INDENT
 dnl $2: name of CLIENT_STATS_ITEM
 dnl $3: unit of ITEM
 define(`CLIENT_MDC_STATS_ITEM',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, mdc_stats_$2, 1)
 PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
-CLIENT_STATS_MDT_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, mdc)
-CLIENT_STATS_MDT_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge, mdc)
-CLIENT_STATS_MDT_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge, mdc)
-CLIENT_STATS_MDT_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive, mdc)
-CLIENT_STATS_MDT_ITEM_FIELD($1 + 1, 5, $2, sumsq, number, derive, mdc)', 1)')dnl
+CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive)
+CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge)
+CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge)
+CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive)
+CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 5, $2, sumsq, number, derive)', 1)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: index of FIELD
+dnl $3: name of ITEM
+dnl $4: kind of FIELD
+dnl $5: type of FIELD
+dnl $6: type OPTION
+define(`CLIENT_STATS_OSC_ITEM_FIELD',
+	`ELEMENT($1, field,
+	`INDEX($1 + 1, $2, 1)
+NAME($1 + 1, $3_$4, 0)
+TYPE($1 + 1, $5, 0)
+OPTION($1 + 1, host, ${key:hostname}, 0)
+OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:client_uuid}, 0)
+OPTION($1 + 1, plugin_instance, client_stats, 0)
+OPTION($1 + 1, type, $6, 0)
+OPTION($1 + 1, type_instance, $3_$4, 0)
+OPTION($1 + 1, tsdb_name, osc_stats_$4, 0)
+OPTION($1 + 1, tsdb_tags, optype=$3_$4 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of CLIENT_STATS_ITEM
+dnl $3: unit of ITEM
+define(`CLIENT_OSC_STATS_ITEM',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, osc_stats_$2, 1)
+PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
+CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive)
+CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge)
+CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge)
+CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive)
+CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 5, $2, sumsq, number, derive)', 1)')dnl
 dnl
 define(`LUSTRE2_12_XML_ENTRIES',
 `

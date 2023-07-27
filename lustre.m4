@@ -67,6 +67,21 @@ define(`LDLM_LOCK_INFO_ENTRIES',
 CONSTANT_FILE_ENTRY($1, lock_timeouts, $2_lock_timeouts, (.+), number, ${key:hostname}, $3, locksinfo, gauge, lock_timeouts, $2_lock_timeouts, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index}, 0)')dnl
 dnl
 dnl $1: number of INDENT
+dnl $2: "mdt" or "ost"
+dnl $3: plugin OPTION
+dnl $4: is first child of parent definition
+define(`LDLM_LOCK_INFO_ALL_ENTRIES',
+`CONSTANT_FILE_ENTRY($1, dirty_age_limit, $2_dirty_age_limit, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, dirty_age_limit, $2_dirty_age_limit, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 1)
+CONSTANT_FILE_ENTRY($1, early_lock_cancel, $2_early_lock_cancel, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, early_lock_cancel, $2_early_lock_cancel, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
+CONSTANT_FILE_ENTRY($1, lock_count, $2_lock_count, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, lock_count, $2_lock_count, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
+CONSTANT_FILE_ENTRY($1, lock_unused_count, $2_lock_unused_count, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, lock_unused_count, $2_lock_unused_count, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
+CONSTANT_FILE_ENTRY($1, lru_cancel_batch, $2_lru_cancel_batch, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, lru_cancel_batch, $2_lru_cancel_batch, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
+CONSTANT_FILE_ENTRY($1, lru_max_age, $2_lru_max_age, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, lru_max_age, $2_lru_max_age, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
+CONSTANT_FILE_ENTRY($1, lru_size, $2_lru_size, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, lru_size, $2_lru_size, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
+CONSTANT_FILE_ENTRY($1, ns_recalc_pct, $2_ns_recalc_pct, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, _ns_recalc_pct, $2_ns_recalc_pct, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
+CONSTANT_FILE_ENTRY($1, resource_count, $2_resource_count, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, resource_count, $2_resource_count, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)')dnl
+dnl
+dnl $1: number of INDENT
 dnl $2: name of RECOVERY_STATUS_ITEM
 dnl $3: "mdt" or "ost"
 dnl $4: match pattern RegEx str
@@ -624,6 +639,94 @@ define(`CLIENT_STATS_ITEM_ONE',
 PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[$3\]', 0)
 CLIENT_STATS_FIELD($1 + 1, 1, $2_samples, number, gauge)
 ', 1)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: index of FIELD
+dnl $3: name of ITEM
+dnl $4: kind of FIELD
+dnl $5: type of FIELD
+dnl $6: type OPTION
+dnl $7: kind of STATS
+define(`CLIENT_STATS_MDT_ITEM_FIELD',
+	`ELEMENT($1, field,
+	`INDEX($1 + 1, $2, 1)
+NAME($1 + 1, $3_$4, 0)
+TYPE($1 + 1, $5, 0)
+OPTION($1 + 1, host, ${key:hostname}, 0)
+OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:client_uuid}, 0)
+OPTION($1 + 1, plugin_instance, client_stats, 0)
+OPTION($1 + 1, type, $6, 0)
+OPTION($1 + 1, type_instance, $3_$4, 0)
+OPTION($1 + 1, tsdb_name, $7_stats_$4, 0)
+OPTION($1 + 1, tsdb_tags, optype=$3_$4 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: index of FIELD
+dnl $3: name of ITEM
+dnl $4: kind of FIELD
+dnl $5: type of FIELD
+dnl $6: type OPTION
+dnl $7: kind of STATS
+define(`CLIENT_STATS_ITEM_FIELD',
+	`ELEMENT($1, field,
+	`INDEX($1 + 1, $2, 1)
+NAME($1 + 1, $3_$4, 0)
+TYPE($1 + 1, $5, 0)
+OPTION($1 + 1, host, ${key:hostname}, 0)
+OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:client_uuid}, 0)
+OPTION($1 + 1, plugin_instance, client_stats, 0)
+OPTION($1 + 1, type, $6, 0)
+OPTION($1 + 1, type_instance, $3_$4, 0)
+OPTION($1 + 1, tsdb_name, $7_stats_$4, 0)
+OPTION($1 + 1, tsdb_tags, optype=$3_$4 fs_name=${subpath:fs_name} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of CLIENT_STATS_ITEM
+dnl $3: unit of ITEM
+define(`CLIENT_STATS_ITEM_ONE_FIELD',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, client_stats_$2, 1)
+PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[$3\]', 0)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, llite)
+', 1)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of CLIENT_STATS_ITEM
+dnl $3: unit of ITEM
+define(`CLIENT_STATS_FOUR_FIELDS',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, llite_stats_$2, 1)
+PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive, llite)', 1)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of CLIENT_STATS_ITEM
+dnl $3: unit of ITEM
+define(`CLIENT_STATS_FIVE_FIELDS',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, llite_stats_$2, 1)
+PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 5, $2, sumsq, number, derive, llite)', 1)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of CLIENT_STATS_ITEM
+dnl $3: unit of ITEM
+define(`CLIENT_MDC_STATS_ITEM',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, mdc_stats_$2, 1)
+PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
+CLIENT_STATS_MDT_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, mdc)
+CLIENT_STATS_MDT_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge, mdc)
+CLIENT_STATS_MDT_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge, mdc)
+CLIENT_STATS_MDT_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive, mdc)
+CLIENT_STATS_MDT_ITEM_FIELD($1 + 1, 5, $2, sumsq, number, derive, mdc)', 1)')dnl
 dnl
 define(`LUSTRE2_12_XML_ENTRIES',
 `

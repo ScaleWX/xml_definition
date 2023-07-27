@@ -1382,6 +1382,18 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 				CLIENT_STATS_FIVE_FIELDS(4, obd_ping, usec)
 				CLIENT_STATS_FIVE_FIELDS(4, mds_statfs, usec)
 			</entry>
+			<entry>
+				<subpath>
+					<subpath_type>constant</subpath_type>
+					<path>read_ahead_stats</path>
+				</subpath>
+				<mode>file</mode>
+				<write_after_read>0</write_after_read>
+				LLITE_READ_AHEAD_STATS_FIELD(4, misses, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, zero_length_file, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, zero_size_window, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, failed_to_fast_read, pages)
+			</entry>
 		</entry>
 	</entry>
 </definition>

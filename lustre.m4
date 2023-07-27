@@ -665,10 +665,9 @@ dnl $2: name of CLIENT_STATS_ITEM
 dnl $3: unit of ITEM
 define(`CLIENT_STATS_ITEM_ONE_FIELD',
 	`ELEMENT($1, item,
-	`NAME($1 + 1, client_stats_$2, 1)
+	`NAME($1 + 1, llite_stats_$2, 1)
 PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[$3\]', 0)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, llite)
-', 1)')dnl
+CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, llite)', 1)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of CLIENT_STATS_ITEM
@@ -758,6 +757,15 @@ CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge)
 CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge)
 CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive)
 CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 5, $2, sumsq, number, derive)', 1)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of CLIENT_STATS_ITEM
+dnl $3: unit of ITEM
+define(`LLITE_READ_AHEAD_STATS_FIELD',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, llite_read_ahead_stats_$2, 1)
+PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[$3\]', 0)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, llite_read_ahead)', 1)')dnl
 dnl
 define(`LUSTRE2_12_XML_ENTRIES',
 `

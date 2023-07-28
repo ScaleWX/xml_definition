@@ -726,6 +726,33 @@ HEAD(Lustre-es5_2)
 				MDC_MDT_CONSTANT_FILE_ENTRY(4, max_rpcs_in_flight, (.+), mdc_rpcs, gauge, max_rpcs_in_flight, max_rpcs_in_flight, 1)
 			</entry>
 		</entry>
+		<entry>
+			<subpath>
+				<subpath_type>constant</subpath_type>
+				<path>osc</path>
+			</subpath>
+			<mode>directory</mode>
+			<entry>
+				<subpath>
+					<subpath_type>regular_expression</subpath_type>
+					<path>(^.+)-(OST[0-9a-fA-F]+)-osc-([0-9a-fA-F]+$)</path>
+					<subpath_field>
+						<index>1</index>
+						<name>fs_name</name>
+					</subpath_field>
+					<subpath_field>
+						<index>2</index>
+						<name>ost_index</name>
+					</subpath_field>
+					<subpath_field>
+						<index>3</index>
+						<name>client_uuid</name>
+					</subpath_field>
+				</subpath>
+				<mode>directory</mode>
+				OSC_RPC_STATS_ENTRY(4)
+			</entry>
+		</entry>
 	</entry>
 	<entry>
 		<subpath>

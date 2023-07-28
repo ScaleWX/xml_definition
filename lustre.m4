@@ -37,6 +37,97 @@ define(`MDC_MDT_CONSTANT_FILE_ENTRY',
 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} mdc_tag=${subpath:mdc_tag}, $8)')dnl
 dnl
 dnl $1: number of INDENT
+dnl $2: index of FIELD
+dnl $3: name of ITEM
+dnl $4: type of FIELD
+dnl $5: type OPTION
+define(`OSC_RPC_STATS_ITEM_FIELD',
+	`ELEMENT($1, field,
+	`INDEX($1 + 1, $2, 1)
+NAME($1 + 1, $3, 0)
+TYPE($1 + 1, $4, 0)
+OPTION($1 + 1, host, ${key:hostname}, 0)
+OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:client_uuid}, 0)
+OPTION($1 + 1, plugin_instance, osc_rpc_stats, 0)
+OPTION($1 + 1, type, $5, 0)
+OPTION($1 + 1, type_instance, $3, 0)
+OPTION($1 + 1, tsdb_name, osc_rpc_stats, 0)
+OPTION($1 + 1, tsdb_tags, optype=$3 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of STATS_ITEM
+dnl $3: label of STATS_ITEM
+define(`OSC_RPC_STATS_ITEM',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, osc_rpc_stats_$2, 1)
+PATTERN($1 + 1, `^$3: +([[:digit:]]+)$', 0)
+OSC_RPC_STATS_ITEM_FIELD($1 + 1, 1, $2, number, gauge)', 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: context start string
+dnl $3: context end string
+dnl $4: is first child of parent ELEMENT
+define(`OSC_RPC_STATS_PAGES',
+        `ELEMENT($1, item,
+        `NAME($1 + 1, osc_rpc_stats_pgs_per_rpc, 1)
+CONTEXT_SUBTYPE($1 + 1, $2, $3, 0)
+PATTERN($1 + 1, `^([[:digit:]]+):[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+\|[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)$', 0)
+FIELD($1 + 1, 1, pgs, string, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_pgs, gauge, pgs, osc_rpc_stats_pgs_per_rpc, type=pgs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 2, read_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_read_rpcs, derive, read_rpcs, osc_rpc_stats_pgs_per_rpc, type=read_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 3, read_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_read_percent, gauge, read_percent, osc_rpc_stats_pgs_per_rpc, type=read_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 4, read_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_read_cum, gauge, read_cum, osc_rpc_stats_pgs_per_rpc, type=read_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 5, write_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_write_rpcs, derive, write_rpcs, osc_rpc_stats_pgs_per_rpc, type=write_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 6, write_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_write_percent, gauge, write_percent, osc_rpc_stats_pgs_per_rpc, type=write_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 7, write_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_write_cum, gauge, write_cum, osc_rpc_stats_pgs_per_rpc, type=write_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)', $4)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: context start string
+dnl $3: context end string
+dnl $4: is first child of parent ELEMENT
+define(`OSC_RPC_STATS_RPCS',
+        `ELEMENT($1, item,
+        `NAME($1 + 1, osc_rpc_stats_rpcs_in_flt, 1)
+CONTEXT_SUBTYPE($1 + 1, $2, $3, 0)
+PATTERN($1 + 1, `^([[:digit:]]+):[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+\|[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)$', 0)
+FIELD($1 + 1, 1, rpcs, string, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_rpcs, gauge, rpcs, osc_rpc_stats_rpcs_in_flt, type=rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 2, read_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_read_rpcs, derive, read_rpcs, osc_rpc_stats_rpcs_in_flt, type=read_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 3, read_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_read_percent, gauge, read_percent, osc_rpc_stats_rpcs_in_flt, type=read_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 4, read_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_read_cum, gauge, read_cum, osc_rpc_stats_rpcs_in_flt, type=read_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 5, write_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_write_rpcs, derive, write_rpcs, osc_rpc_stats_rpcs_in_flt, type=write_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 6, write_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_write_percent, gauge, write_percent, osc_rpc_stats_rpcs_in_flt, type=write_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 7, write_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_write_cum, gauge, write_cum, osc_rpc_stats_rpcs_in_flt, type=write_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)', $4)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: context start string
+dnl $3: context end string
+dnl $4: is first child of parent ELEMENT
+define(`OSC_RPC_STATS_OFFSET',
+        `ELEMENT($1, item,
+        `NAME($1 + 1, osc_rpc_stats_rpcs_offset, 1)
+CONTEXT_SUBTYPE($1 + 1, $2, $3, 0)
+PATTERN($1 + 1, `^([[:digit:]]+):[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+\|[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)$', 0)
+FIELD($1 + 1, 1, offset, string, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_offset, gauge, offset, osc_rpc_stats_offset, type=offset fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 2, read_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_read_rpcs, derive, read_rpcs, osc_rpc_stats_offset, type=read_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 3, read_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_read_percent, gauge, read_percent, osc_rpc_stats_offset, type=read_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 4, read_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_read_cum, gauge, read_cum, osc_rpc_stats_offset, type=read_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 5, write_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_write_rpcs, derive, write_rpcs, osc_rpc_stats_offset, type=write_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 6, write_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_write_percent, gauge, write_percent, osc_rpc_stats_offset, type=write_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 7, write_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:client_uuid}, osc_rpc_stats_write_cum, gauge, write_cum, osc_rpc_stats_offset, type=write_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)', $4)')dnl
+dnl
+dnl $1: number of INDENT
+define(`OSC_RPC_STATS_ENTRY',
+	`ELEMENT($1, entry,
+	`SUBPATH($1 + 1, constant, rpc_stats, 1)
+MODE($1 + 1, file, 0)
+OSC_RPC_STATS_ITEM($1 + 1, read_rpcs_in_flt, `read RPCs in flight')
+OSC_RPC_STATS_ITEM($1 + 1, write_rpcs_in_flt, `write RPCs in flight')
+OSC_RPC_STATS_ITEM($1 + 1, pending_write_pages, `pending write pages')
+OSC_RPC_STATS_ITEM($1 + 1, pending_read_pages, `pending read pages')
+OSC_RPC_STATS_PAGES($1 + 1, `pages per rpc', `rpcs in flight', 0)
+OSC_RPC_STATS_RPCS($1 + 1, `rpcs in flight', `offset', 0)
+OSC_RPC_STATS_OFFSET($1 + 1, `offset', `', 0)', $3)')dnl
+dnl
+dnl $1: number of INDENT
 dnl $2: item name prefix
 dnl $3: plugin OPTION
 dnl $4: plugin_instance OPTION

@@ -126,7 +126,7 @@ dnl $3: is first child of parent definition
 define(`EXPORT_MD_STATS_ITEM_V2',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, exp_md_stats_$2, 1)
-PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[usecs\] +([[:digit:]]+) +([[:digit:]]+) +([[:digit:]]+) +([[:digit:]]+)', 0)
+PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[usecs\] +([[:digit:]]+) +([[:digit:]]+) +([[:digit:]]+) +([[:digit:]]+)', 0)
 FIELD($1 + 1, 1, exp_md_stats_$2, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, exp_md_stats_$2, exp_md_stats, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
 FIELD($1 + 1, 2, exp_md_stats_$2_min, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, exp_md_stats_$2_min, exp_md_stats_min_latency, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)
 FIELD($1 + 1, 3, exp_md_stats_$2_max, number, ${key:hostname}, ${subpath:mdt_exp_client}-${subpath:mdt_exp_type}_${subpath:fs_name}-${subpath:mdt_index}, stats, derive, exp_md_stats_$2_max, exp_md_stats_max_latency, optype=$2 exp_client=${subpath:mdt_exp_client} exp_type=${subpath:mdt_exp_type} fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)

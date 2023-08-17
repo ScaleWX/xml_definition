@@ -27,6 +27,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 exa-5.2.7.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 exa-6.2.0.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 exa-6.2.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}
+%{__install} -Dp -m0644 lustre-2.14.0-ddn96.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 ime-1.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 ime-1.2.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 infiniband-0.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}/infiniband-0.1_definition.xml
@@ -64,6 +65,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{_sysconfdir}%{filedatadir}/exa-5.2.7.xml
 %{_sysconfdir}%{filedatadir}/exa-6.2.0.xml
 %{_sysconfdir}%{filedatadir}/exa-6.2.1.xml
+%{_sysconfdir}%{filedatadir}/lustre-2.14.0-ddn96.xml
 %{_sysconfdir}%{filedatadir}/ime-1.1.xml
 %{_sysconfdir}%{filedatadir}/ime-1.2.xml
 %{_sysconfdir}%{filedatadir}/infiniband-0.1_definition.xml

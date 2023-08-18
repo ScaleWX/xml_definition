@@ -2,7 +2,7 @@
 
 Name:		filedata_definition
 Version:	3.0.13
-Release:	2
+Release:	3
 Summary:	XML definition files
 Group:		Applications/ScaleWX
 License:	Share

@@ -13,6 +13,7 @@ M4_DESTINATION_FILES = exa-5.2.5.m4 \
 	lustre-2.14.0_ddn86.m4 \
 	lustre-2.14.0_ddn87.m4 \
 	lustre-2.14.0_ddn96.m4 \
+	lustre-2.14.0_ddn101.m4 \
 	ime-1.1.m4 \
 	ime-1.2.m4 \
 	infiniband-0.1.m4 \

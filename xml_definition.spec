@@ -1,8 +1,8 @@
 %define filedatadir /filedata
 
 Name:		filedata_definition
-Version:	3.0.13
-Release:	3
+Version:	3.0.14
+Release:	1
 Summary:	XML definition files
 Group:		Applications/ScaleWX
 License:	Share

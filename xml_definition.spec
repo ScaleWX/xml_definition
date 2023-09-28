@@ -1,8 +1,8 @@
 %define filedatadir /filedata
 
 Name:		filedata_definition
-Version:	3.0.13
-Release:	3
+Version:	3.0.14
+Release:	1
 Summary:	XML definition files
 Group:		Applications/ScaleWX
 License:	Share
@@ -33,6 +33,8 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.14.0_ddn86.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.14.0_ddn87.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.14.0_ddn96.xml %{buildroot}%{_sysconfdir}%{filedatadir}
+%{__install} -Dp -m0644 lustre-2.14.0_ddn101.xml %{buildroot}%{_sysconfdir}%{filedatadir}
+%{__install} -Dp -m0644 lustre-2.14.0_ddn102.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 ime-1.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 ime-1.2.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 infiniband-0.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}/infiniband-0.1_definition.xml
@@ -76,6 +78,8 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn86.xml
 %{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn87.xml
 %{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn96.xml
+%{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn101.xml
+%{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn102.xml
 %{_sysconfdir}%{filedatadir}/ime-1.1.xml
 %{_sysconfdir}%{filedatadir}/ime-1.2.xml
 %{_sysconfdir}%{filedatadir}/infiniband-0.1_definition.xml

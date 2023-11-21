@@ -726,6 +726,33 @@ HEAD(Lustre-es5_2)
 				MDC_MDT_CONSTANT_FILE_ENTRY(4, max_rpcs_in_flight, (.+), mdc_rpcs, gauge, max_rpcs_in_flight, max_rpcs_in_flight, 1)
 			</entry>
 		</entry>
+		<entry>
+			<subpath>
+				<subpath_type>constant</subpath_type>
+				<path>osc</path>
+			</subpath>
+			<mode>directory</mode>
+			<entry>
+				<subpath>
+					<subpath_type>regular_expression</subpath_type>
+					<path>(^.+)-(OST[0-9a-fA-F]+)-osc-([0-9a-fA-F]+$)</path>
+					<subpath_field>
+						<index>1</index>
+						<name>fs_name</name>
+					</subpath_field>
+					<subpath_field>
+						<index>2</index>
+						<name>ost_index</name>
+					</subpath_field>
+					<subpath_field>
+						<index>3</index>
+						<name>client_uuid</name>
+					</subpath_field>
+				</subpath>
+				<mode>directory</mode>
+				OSC_RPC_STATS_ENTRY(4)
+			</entry>
+		</entry>
 	</entry>
 	<entry>
 		<subpath>
@@ -776,6 +803,46 @@ HEAD(Lustre-es5_2)
 					</subpath>
 					<mode>directory</mode>
 					LDLM_LOCK_INFO_ENTRIES(5, mdt, ${subpath:fs_name}-${subpath:mdt_index}, 1)
+				</entry>
+				<entry>
+					<subpath>
+						<subpath_type>regular_expression</subpath_type>
+						<path>^(.+)-(OST[0-9a-fA-F]+)-osc-([0-9a-fA-F]+)$</path>
+						<subpath_field>
+							<index>1</index>
+							<name>fs_name</name>
+						</subpath_field>
+						<subpath_field>
+							<index>2</index>
+							<name>ost_index</name>
+						</subpath_field>
+						<subpath_field>
+							<index>3</index>
+							<name>client_uuid</name>
+						</subpath_field>
+					</subpath>
+					<mode>directory</mode>
+					LDLM_LOCK_INFO_ALL_ENTRIES(5, ost, ${subpath:fs_name}-${subpath:ost_index}, 1)
+				</entry>
+				<entry>
+					<subpath>
+						<subpath_type>regular_expression</subpath_type>
+						<path>^(.+)-(MDT[0-9a-fA-F]+)-mdc-([0-9a-fA-F]+)$</path>
+						<subpath_field>
+							<index>1</index>
+							<name>fs_name</name>
+						</subpath_field>
+						<subpath_field>
+							<index>2</index>
+							<name>mdt_index</name>
+						</subpath_field>
+						<subpath_field>
+							<index>3</index>
+							<name>client_uuid</name>
+						</subpath_field>
+					</subpath>
+					<mode>directory</mode>
+					LDLM_LOCK_INFO_ALL_ENTRIES(5, mdt, ${subpath:fs_name}-${subpath:mdt_index}-${subpath:client_uuid}, 1)
 				</entry>
 			</entry>
 		</entry>
@@ -1173,6 +1240,103 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 				</entry>
 			</entry>
 		</entry>
+		<entry>
+			<subpath>
+				<subpath_type>constant</subpath_type>
+				<path>mdc</path>
+			</subpath>
+			<mode>directory</mode>
+			<entry>
+				<subpath>
+					<subpath_type>regular_expression</subpath_type>
+					<path>(^.+)-(MDT[0-9a-fA-F]+)-mdc-([0-9a-fA-F]+$)</path>
+					<subpath_field>
+						<index>1</index>
+						<name>fs_name</name>
+					</subpath_field>
+					<subpath_field>
+						<index>2</index>
+						<name>mdt_index</name>
+					</subpath_field>
+					<subpath_field>
+						<index>3</index>
+						<name>client_uuid</name>
+					</subpath_field>
+				</subpath>
+				<mode>directory</mode>
+				<entry>
+					<subpath>
+						<subpath_type>constant</subpath_type>
+						<path>stats</path>
+					</subpath>
+					<mode>file</mode>
+					<write_after_read>0</write_after_read>
+					CLIENT_MDC_STATS_ITEM(5, req_waittime, usec)
+					CLIENT_MDC_STATS_ITEM(5, req_active, reqs)
+					CLIENT_MDC_STATS_ITEM(5, ldlm_ibits_enqueue, reqs)
+					CLIENT_MDC_STATS_ITEM(5, mds_getattr, usec)
+					CLIENT_MDC_STATS_ITEM(5, mds_close, usec)
+					CLIENT_MDC_STATS_ITEM(5, mds_connect, usec)
+					CLIENT_MDC_STATS_ITEM(5, mds_get_root, usec)
+					CLIENT_MDC_STATS_ITEM(5, mds_readpage, usec)
+					CLIENT_MDC_STATS_ITEM(5, mds_statfs, usec)
+					CLIENT_MDC_STATS_ITEM(5, ldlm_cancel, usec)
+					CLIENT_MDC_STATS_ITEM(5, obd_ping, usec)
+					CLIENT_MDC_STATS_ITEM(5, seq_query, reqs)
+				</entry>
+			</entry>
+		</entry>
+		<entry>
+			<subpath>
+				<subpath_type>constant</subpath_type>
+				<path>osc</path>
+			</subpath>
+			<mode>directory</mode>
+			<entry>
+				<subpath>
+					<subpath_type>regular_expression</subpath_type>
+					<path>(^.+)-(OST[0-9a-fA-F]+)-osc-([0-9a-fA-F]+$)</path>
+					<subpath_field>
+						<index>1</index>
+						<name>fs_name</name>
+					</subpath_field>
+					<subpath_field>
+						<index>2</index>
+						<name>ost_index</name>
+					</subpath_field>
+					<subpath_field>
+						<index>3</index>
+						<name>client_uuid</name>
+					</subpath_field>
+				</subpath>
+				<mode>directory</mode>
+				<entry>
+					<subpath>
+						<subpath_type>constant</subpath_type>
+						<path>stats</path>
+					</subpath>
+					<mode>file</mode>
+					<write_after_read>0</write_after_read>
+					CLIENT_OSC_STATS_ITEM(5, req_waittime, usec)
+					CLIENT_OSC_STATS_ITEM(5, req_active, reqs)
+					CLIENT_OSC_STATS_ITEM(5, ldlm_glimpse_enqueue, reqs)
+					CLIENT_OSC_STATS_ITEM(5, ldlm_extent_enqueue, reqs)
+					CLIENT_OSC_STATS_ITEM(5, read_bytes, bytes)
+					CLIENT_OSC_STATS_ITEM(5, write_bytes, bytes)
+					CLIENT_OSC_STATS_ITEM(5, ost_getattr, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_setattr, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_read, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_write, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_connect, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_disconnect, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_punch, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_sync, usec)
+					CLIENT_OSC_STATS_ITEM(5, ost_set_info, usec)
+					CLIENT_OSC_STATS_ITEM(5, ldlm_cancel, usec)
+					CLIENT_OSC_STATS_ITEM(5, obd_ping, usec)
+				</entry>
+			</entry>
+		</entry>
 	</entry>
 	<entry>
 		<subpath>
@@ -1201,39 +1365,61 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 				</subpath>
 				<mode>file</mode>
 				<write_after_read>0</write_after_read>
-				CLIENT_STATS_ITEM_FOUR(4, read_bytes, bytes)
-				CLIENT_STATS_ITEM_FOUR(4, write_bytes, bytes)
-				CLIENT_STATS_ITEM_FOUR(4, read, usec)
-				CLIENT_STATS_ITEM_FOUR(4, write, usec)
-				CLIENT_STATS_ITEM_ONE(4, ioctl, reqs)
-				CLIENT_STATS_ITEM_FOUR(4, open, usec)
-				CLIENT_STATS_ITEM_FOUR(4, close, usec)
-				CLIENT_STATS_ITEM_FOUR(4, mmap, usec)
-				CLIENT_STATS_ITEM_FOUR(4, page_fault, usec)
-				CLIENT_STATS_ITEM_FOUR(4, page_mkwrite, usec)
-				CLIENT_STATS_ITEM_FOUR(4, seek, usec)
-				CLIENT_STATS_ITEM_FOUR(4, fsync, usec)
-				CLIENT_STATS_ITEM_FOUR(4, readdir, usec)
-				CLIENT_STATS_ITEM_FOUR(4, setattr, usec)
-				CLIENT_STATS_ITEM_FOUR(4, truncate, usec)
-				CLIENT_STATS_ITEM_FOUR(4, flock, usec)
-				CLIENT_STATS_ITEM_FOUR(4, getattr, usec)
-				CLIENT_STATS_ITEM_FOUR(4, fallocate, usec)
-				CLIENT_STATS_ITEM_FOUR(4, create, usec)
-				CLIENT_STATS_ITEM_FOUR(4, link, usec)
-				CLIENT_STATS_ITEM_FOUR(4, unlink, usec)
-				CLIENT_STATS_ITEM_FOUR(4, symlink, usec)
-				CLIENT_STATS_ITEM_FOUR(4, mkdir, usec)
-				CLIENT_STATS_ITEM_FOUR(4, rmdir, usec)
-				CLIENT_STATS_ITEM_FOUR(4, mknod, usec)
-				CLIENT_STATS_ITEM_FOUR(4, rename, usec)
-				CLIENT_STATS_ITEM_FOUR(4, statfs, usec)
-				CLIENT_STATS_ITEM_FOUR(4, setxattr, usec)
-				CLIENT_STATS_ITEM_FOUR(4, getxattr, usec)
-				CLIENT_STATS_ITEM_ONE(4, getxattr_hits, reqs)
-				CLIENT_STATS_ITEM_FOUR(4, listxattr, usec)
-				CLIENT_STATS_ITEM_FOUR(4, removexattr, usec)
-				CLIENT_STATS_ITEM_FOUR(4, inode_permission, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, read_bytes, bytes)
+				CLIENT_STATS_FOUR_FIELDS(4, write_bytes, bytes)
+				CLIENT_STATS_FOUR_FIELDS(4, read, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, write, usec)
+				CLIENT_STATS_ITEM_ONE_FIELD(4, ioctl, reqs)
+				CLIENT_STATS_FOUR_FIELDS(4, open, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, close, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, mmap, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, page_fault, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, page_mkwrite, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, seek, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, fsync, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, readdir, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, setattr, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, truncate, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, flock, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, getattr, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, fallocate, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, create, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, link, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, unlink, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, symlink, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, mkdir, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, rmdir, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, mknod, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, rename, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, statfs, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, setxattr, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, getxattr, usec)
+				CLIENT_STATS_ITEM_ONE_FIELD(4, getxattr_hits, reqs)
+				CLIENT_STATS_FOUR_FIELDS(4, listxattr, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, removexattr, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, inode_permission, usec)
+				CLIENT_STATS_FOUR_FIELDS(4, opencount, reqs)
+				CLIENT_STATS_FOUR_FIELDS(4, openclosetime, usec)
+				CLIENT_STATS_FIVE_FIELDS(4, req_waittime, usec)
+				CLIENT_STATS_FIVE_FIELDS(4, req_active, reqs)
+				CLIENT_STATS_FIVE_FIELDS(4, ldlm_ibits_enqueue, reqs)
+				CLIENT_STATS_FIVE_FIELDS(4, mds_close, usec)
+				CLIENT_STATS_FIVE_FIELDS(4, ldlm_cancel, usec)
+				CLIENT_STATS_FIVE_FIELDS(4, mds_readpage, usec)
+				CLIENT_STATS_FIVE_FIELDS(4, obd_ping, usec)
+				CLIENT_STATS_FIVE_FIELDS(4, mds_statfs, usec)
+			</entry>
+			<entry>
+				<subpath>
+					<subpath_type>constant</subpath_type>
+					<path>read_ahead_stats</path>
+				</subpath>
+				<mode>file</mode>
+				<write_after_read>0</write_after_read>
+				LLITE_READ_AHEAD_STATS_FIELD(4, misses, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, zero_length_file, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, zero_size_window, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, failed_to_fast_read, pages)
 			</entry>
 		</entry>
 	</entry>

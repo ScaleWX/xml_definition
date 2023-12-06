@@ -790,7 +790,7 @@ HEAD(Lustre-es5_2)
 							<name>qmt_dt_glb_usr</name>
 							<pattern>- +id: +(.+)
   limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							QMT_DT(7, usr)
+							QMT_DT(7, user)
 						</item>
 					</entry>
 					<entry>
@@ -800,7 +800,7 @@ HEAD(Lustre-es5_2)
 							<name>qmt_dt_glb_grp</name>
 							<pattern>- +id: +(.+)
   limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							QMT_DT(7, grp)
+							QMT_DT(7, group)
 						</item>
 					</entry>
 					<entry>
@@ -810,7 +810,7 @@ HEAD(Lustre-es5_2)
 							<name>qmt_dt_glb_prj</name>
 							<pattern>- +id: +(.+)
   limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							QMT_DT(7, prj)
+							QMT_DT(7, project)
 						</item>
 					</entry>
 				</entry>
@@ -831,7 +831,7 @@ HEAD(Lustre-es5_2)
 							<name>qmt_md_glb_usr</name>
 							<pattern>- +id: +(.+)
   limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							QMT_MD(7, usr)
+							QMT_MD(7, user)
 						</item>
 					</entry>
 					<entry>
@@ -841,7 +841,7 @@ HEAD(Lustre-es5_2)
 							<name>qmt_md_glb_grp</name>
 							<pattern>- +id: +(.+)
   limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							QMT_MD(7, grp)
+							QMT_MD(7, group)
 						</item>
 					</entry>
 					<entry>
@@ -851,7 +851,7 @@ HEAD(Lustre-es5_2)
 							<name>qmt_md_glb_prj</name>
 							<pattern>- +id: +(.+)
   limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
-							QMT_MD(7, prj)
+							QMT_MD(7, project)
 						</item>
 					</entry>
 				</entry>

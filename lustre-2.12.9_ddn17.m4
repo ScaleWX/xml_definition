@@ -753,6 +753,110 @@ HEAD(Lustre-es5_2)
 				OSC_RPC_STATS_ENTRY(4)
 			</entry>
 		</entry>
+		<entry>
+			<subpath>
+				<subpath_type>constant</subpath_type>
+				<path>qmt</path>
+			</subpath>
+			<mode>directory</mode>
+			<entry>
+				<subpath>
+					<subpath_type>regular_expression</subpath_type>
+					<path>(^.+)-(QMT[0-9a-fA-F]+$)</path>
+					<subpath_field>
+						<index>1</index>
+						<name>fs_name</name>
+					</subpath_field>
+					<subpath_field>
+						<index>2</index>
+						<name>qmt_index</name>
+					</subpath_field>
+				</subpath>
+				<mode>directory</mode>
+				<entry>
+					<subpath>
+						<subpath_type>regular_expression</subpath_type>
+						<path>^dt-([[:alnum:]]+$)</path>
+						<subpath_field>
+							<index>1</index>
+							<name>dt_index</name>
+						</subpath_field>
+					</subpath>
+					<mode>directory</mode>
+					<entry>
+						SUBPATH(6, constant, glb-usr, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>qmt_dt_glb_usr</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							QMT_DT(7, user)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, glb-grp, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>qmt_dt_glb_grp</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							QMT_DT(7, group)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, glb-prj, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>qmt_dt_glb_prj</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							QMT_DT(7, project)
+						</item>
+					</entry>
+				</entry>
+				<entry>
+					<subpath>
+						<subpath_type>regular_expression</subpath_type>
+						<path>^md-([[:alnum:]]+$)</path>
+						<subpath_field>
+							<index>1</index>
+							<name>md_index</name>
+						</subpath_field>
+					</subpath>
+					<mode>directory</mode>
+					<entry>
+						SUBPATH(6, constant, glb-usr, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>qmt_md_glb_usr</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							QMT_MD(7, user)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, glb-grp, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>qmt_md_glb_grp</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							QMT_MD(7, group)
+						</item>
+					</entry>
+					<entry>
+						SUBPATH(6, constant, glb-prj, 1)
+						MODE(6, file, 1)
+						<item>
+							<name>qmt_md_glb_prj</name>
+							<pattern>- +id: +(.+)
+  limits: +\{ hard: *([[:digit:]]+), soft: *([[:digit:]]+), granted: *([[:digit:]]+), time: *([[:digit:]]+).+</pattern>
+							QMT_MD(7, project)
+						</item>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
 	</entry>
 	<entry>
 		<subpath>

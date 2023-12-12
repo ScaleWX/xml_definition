@@ -1954,3 +1954,21 @@ FIELD($1, 2, hard, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_ind
 FIELD($1, 3, soft, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, quota_limit_$2_${content:id}, gauge, soft, ost_quota_limit_$2_samples, optype=soft fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} $2_id=${content:id}, 0)
 FIELD($1, 4, granted, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, quota_limit_$2_${content:id}, gauge, granted, ost_quota_limit_$2_samples, optype=granted fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} $2_id=${content:id}, 0)
 FIELD($1, 5, time, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}, quota_limit_$2_${content:id}, gauge, time, ost_quota_limit_$2_samples, optype=time fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} $2_id=${content:id}, 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: kind of Limit Items
+define(`QMT_DT',
+	`FIELD($1, 1, id, string, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_dt_glb_$2_${content:id}, gauge, id, qmt_dt_glb_$2, optype=id fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} dt_index=${subpath:dt_index} $2_id=${content:id}, 1)
+FIELD($1, 2, hard, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_dt_glb_$2_${content:id}, gauge, hard, qmt_dt_glb_$2, optype=hard fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} dt_index=${subpath:dt_index} $2_id=${content:id}, 0)
+FIELD($1, 3, soft, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_dt_glb_$2_${content:id}, gauge, soft, qmt_dt_glb_$2, optype=soft fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} dt_index=${subpath:dt_index} $2_id=${content:id}, 0)
+FIELD($1, 4, granted, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_dt_glb_$2_${content:id}, gauge, granted, qmt_dt_glb_$2, optype=granted fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} dt_index=${subpath:dt_index} $2_id=${content:id}, 0)
+FIELD($1, 5, time, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_dt_glb_$2_${content:id}, gauge, time, qmt_dt_glb_$2, optype=time fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} dt_index=${subpath:dt_index} $2_id=${content:id}, 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: kind of Limit Items
+define(`QMT_MD',
+	`FIELD($1, 1, id, string, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_md_glb_$2_${content:id}, gauge, id, qmt_md_glb_$2, optype=id fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} md_index=${subpath:md_index} $2_id=${content:id}, 1)
+FIELD($1, 2, hard, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_md_glb_$2_${content:id}, gauge, hard, qmt_md_glb_$2, optype=hard fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} md_index=${subpath:md_index} $2_id=${content:id}, 0)
+FIELD($1, 3, soft, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_md_glb_$2_${content:id}, gauge, soft, qmt_md_glb_$2, optype=soft fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} md_index=${subpath:md_index} $2_id=${content:id}, 0)
+FIELD($1, 4, granted, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_md_glb_$2_${content:id}, gauge, granted, qmt_md_glb_$2, optype=granted fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} md_index=${subpath:md_index} $2_id=${content:id}, 0)
+FIELD($1, 5, time, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_md_glb_$2_${content:id}, gauge, time, qmt_md_glb_$2, optype=time fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} md_index=${subpath:md_index} $2_id=${content:id}, 0)')dnl

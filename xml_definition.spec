@@ -29,7 +29,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 exa-6.2.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.12.8_ddn18.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.12.9_ddn17.xml %{buildroot}%{_sysconfdir}%{filedatadir}
-%{__install} -Dp -m0644 lustre-2.12.9_ddn38.xml %{buildroot}%{_sysconfdir}%{filedatadir}
+%{__install} -Dp -m0644 lustre-2.12.9_ddn27.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.14.0_ddn23.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.14.0_ddn86.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.14.0_ddn87.xml %{buildroot}%{_sysconfdir}%{filedatadir}
@@ -76,7 +76,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{_sysconfdir}%{filedatadir}/exa-6.2.1.xml
 %{_sysconfdir}%{filedatadir}/lustre-2.12.8_ddn18.xml
 %{_sysconfdir}%{filedatadir}/lustre-2.12.9_ddn17.xml
-%{_sysconfdir}%{filedatadir}/lustre-2.12.9_ddn38.xml
+%{_sysconfdir}%{filedatadir}/lustre-2.12.9_ddn27.xml
 %{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn23.xml
 %{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn86.xml
 %{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn87.xml

@@ -593,10 +593,10 @@ dnl $5: ost or mdt
 dnl $6: is first child of parent definition
 define(`JOBSTAT_FIELD_META_OPERATIONS',
 	`JOBSTAT_FIELD($1, $2, $3, $4, derive, $5, samples, $6)
-	 JOBSTAT_FIELD_V2($1, eval(`$2 + 1'), min_$3, $4, gauge, $5, $3, $6, min)
-	 JOBSTAT_FIELD_V2($1, eval(`$2 + 2'), max_$3, $4, gauge, $5, $3, $6, max)
-	 JOBSTAT_FIELD_V2($1, eval(`$2 + 3'), sum_$3, $4, derive, $5, $3, $6, sum)
-	 JOBSTAT_FIELD_V2($1, eval(`$2 + 4'), sumsq_$3, $4, derive, $5, $3, $6, sumsq)')dnl
+JOBSTAT_FIELD_V2($1, eval(`$2 + 1'), min_$3, $4, gauge, $5, $3, 0, min)
+JOBSTAT_FIELD_V2($1, eval(`$2 + 2'), max_$3, $4, gauge, $5, $3, 0, max)
+JOBSTAT_FIELD_V2($1, eval(`$2 + 3'), sum_$3, $4, derive, $5, $3, 0, sum)
+JOBSTAT_FIELD_V2($1, eval(`$2 + 4'), sumsq_$3, $4, derive, $5, $3, 0, sumsq)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: index of FIELD

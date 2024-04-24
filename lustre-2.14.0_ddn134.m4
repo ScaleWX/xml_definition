@@ -1427,7 +1427,6 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 						<path>stats</path>
 					</subpath>
 					<mode>file</mode>
-					<write_after_read>0</write_after_read>
 					CLIENT_MDC_STATS_ITEM(5, req_waittime, usec)
 					CLIENT_MDC_STATS_ITEM(5, req_active, reqs)
 					CLIENT_MDC_STATS_ITEM(5, ldlm_ibits_enqueue, reqs)
@@ -1473,7 +1472,6 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 						<path>stats</path>
 					</subpath>
 					<mode>file</mode>
-					<write_after_read>0</write_after_read>
 					CLIENT_OSC_STATS_ITEM(5, req_waittime, usec)
 					CLIENT_OSC_STATS_ITEM(5, req_active, reqs)
 					CLIENT_OSC_STATS_ITEM(5, ldlm_glimpse_enqueue, reqs)
@@ -1571,7 +1569,6 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 					<path>stats</path>
 				</subpath>
 				<mode>file</mode>
-				<write_after_read>0</write_after_read>
 				CLIENT_STATS_FOUR_FIELDS(4, read_bytes, bytes)
 				CLIENT_STATS_FOUR_FIELDS(4, write_bytes, bytes)
 				CLIENT_STATS_FOUR_FIELDS(4, read, usec)
@@ -1622,7 +1619,6 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 					<path>read_ahead_stats</path>
 				</subpath>
 				<mode>file</mode>
-				<write_after_read>0</write_after_read>
 				LLITE_READ_AHEAD_STATS_FIELD(4, misses, pages)
 				LLITE_READ_AHEAD_STATS_FIELD(4, zero_length_file, pages)
 				LLITE_READ_AHEAD_STATS_FIELD(4, zero_size_window, pages)

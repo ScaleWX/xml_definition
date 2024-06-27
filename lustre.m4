@@ -169,7 +169,7 @@ CONSTANT_FILE_ENTRY($1, lock_unused_count, $2_lock_unused_count, (.+), number, $
 CONSTANT_FILE_ENTRY($1, lru_cancel_batch, $2_lru_cancel_batch, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, lru_cancel_batch, $2_lru_cancel_batch, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
 CONSTANT_FILE_ENTRY($1, lru_max_age, $2_lru_max_age, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, lru_max_age, $2_lru_max_age, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
 CONSTANT_FILE_ENTRY($1, lru_size, $2_lru_size, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, lru_size, $2_lru_size, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
-CONSTANT_FILE_ENTRY($1, ns_recalc_pct, $2_ns_recalc_pct, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, _ns_recalc_pct, $2_ns_recalc_pct, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
+CONSTANT_FILE_ENTRY($1, ns_recalc_pct, $2_ns_recalc_pct, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, ns_recalc_pct, $2_ns_recalc_pct, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)
 CONSTANT_FILE_ENTRY($1, resource_count, $2_resource_count, (.+), number, ${key:hostname}, $3, ldlm_info, gauge, resource_count, $2_resource_count, fs_name=${subpath:fs_name} $2_index=${subpath:$2_index} client_uuid=${subpath:client_uuid}, 0)')dnl
 dnl
 dnl $1: number of INDENT

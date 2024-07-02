@@ -1631,10 +1631,16 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 					<path>read_ahead_stats</path>
 				</subpath>
 				<mode>file</mode>
+				LLITE_READ_AHEAD_STATS_FIELD(4, hits, pages)
 				LLITE_READ_AHEAD_STATS_FIELD(4, misses, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, readpage_not_consecutive, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, read_but_discarded, pages)
 				LLITE_READ_AHEAD_STATS_FIELD(4, zero_length_file, pages)
 				LLITE_READ_AHEAD_STATS_FIELD(4, zero_size_window, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, readahead_to_eof, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, failed_to_reach_end, pages)
 				LLITE_READ_AHEAD_STATS_FIELD(4, failed_to_fast_read, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, mmap_range_read, pages)
 			</entry>
 		</entry>
 	</entry>

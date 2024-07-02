@@ -444,7 +444,7 @@ dnl $1: number of INDENT
 dnl $2: type of item
 dnl $3: unit of the stat, not used currently
 define(`CLIENT_STATS_MEAN',
-	`MATH_ENTRY($1, client_stats_$2_sum, /, client_stats_$2_samples, client_stats_$2_mean, $2_mean, 1)')dnl
+	`MATH_ENTRY($1, llite_stats_$2_sum, /, llite_stats_$2_samples, llite_stats_$2_mean, $2_mean, 1)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: index of FIELD
@@ -759,8 +759,8 @@ OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:client_uuid}, 0)
 OPTION($1 + 1, plugin_instance, client_stats, 0)
 OPTION($1 + 1, type, $6, 0)
 OPTION($1 + 1, type_instance, $3_$4, 0)
-OPTION($1 + 1, tsdb_name, $7_stats_$4, 0)
-OPTION($1 + 1, tsdb_tags, optype=$3_$4 fs_name=${subpath:fs_name} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
+OPTION($1 + 1, tsdb_name, $7_stats_$3_$4, 0)
+OPTION($1 + 1, tsdb_tags, fs_name=${subpath:fs_name} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of CLIENT_STATS_ITEM

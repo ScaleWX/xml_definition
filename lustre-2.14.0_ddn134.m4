@@ -972,7 +972,7 @@ HEAD(Lustre-es6_0)
 						</subpath_field>
 					</subpath>
 					<mode>directory</mode>
-					LDLM_LOCK_INFO_ALL_ENTRIES(5, ost, ${subpath:fs_name}-${subpath:ost_index}, 1)
+					LDLM_LOCK_INFO_ALL_ENTRIES(5, ost, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}, 1)
 				</entry>
 				<entry>
 					<subpath>

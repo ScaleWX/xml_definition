@@ -2,6 +2,8 @@ include(`lustre.m4')dnl
 HEAD(Lustre-es6_0)
 <definition>
 	<version>es6_0</version>
+	CLIENT_STATS_MEAN(1, read_bytes, bytes)
+	CLIENT_STATS_MEAN(1, write_bytes, bytes)
 	CLIENT_STATS_MEAN(1, read, usec)
 	CLIENT_STATS_MEAN(1, write, usec)
 	CLIENT_STATS_MEAN(1, open, usec)
@@ -31,6 +33,16 @@ HEAD(Lustre-es6_0)
 	CLIENT_STATS_MEAN(1, listxattr, usec)
 	CLIENT_STATS_MEAN(1, removexattr, usec)
 	CLIENT_STATS_MEAN(1, inode_permission, usec)
+	CLIENT_STATS_MEAN(1, opencount, reqs)
+	CLIENT_STATS_MEAN(1, openclosetime, usec)
+	CLIENT_STATS_MEAN(1, req_waittime, usec)
+	CLIENT_STATS_MEAN(1, req_active, reqs)
+	CLIENT_STATS_MEAN(1, ldlm_ibits_enqueue, reqs)
+	CLIENT_STATS_MEAN(1, mds_close, usec)
+	CLIENT_STATS_MEAN(1, ldlm_cancel, usec)
+	CLIENT_STATS_MEAN(1, mds_readpage, usec)
+	CLIENT_STATS_MEAN(1, obd_ping, usec)
+	CLIENT_STATS_MEAN(1, mds_statfs, usec)
 	MATH_ENTRY(1, mdt_filesinfo_total, -, mdt_filesinfo_free, mdt_filesinfo_used, filesused, 1)
 	MATH_ENTRY(1, mdt_kbytesinfo_total, -, mdt_kbytesinfo_free, mdt_kbytesinfo_used, kbytesused, 1)
 	MATH_ENTRY(1, ost_filesinfo_total, -, ost_filesinfo_free, ost_filesinfo_used, filesused, 1)
@@ -960,7 +972,7 @@ HEAD(Lustre-es6_0)
 						</subpath_field>
 					</subpath>
 					<mode>directory</mode>
-					LDLM_LOCK_INFO_ALL_ENTRIES(5, ost, ${subpath:fs_name}-${subpath:ost_index}, 1)
+					LDLM_LOCK_INFO_ALL_ENTRIES(5, ost, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}, 1)
 				</entry>
 				<entry>
 					<subpath>
@@ -1429,13 +1441,18 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 					<mode>file</mode>
 					CLIENT_MDC_STATS_ITEM(5, req_waittime, usec)
 					CLIENT_MDC_STATS_ITEM(5, req_active, reqs)
+					CLIENT_MDC_STATS_ITEM(5, ldlm_glimpse_enqueue, reqs)
 					CLIENT_MDC_STATS_ITEM(5, ldlm_ibits_enqueue, reqs)
 					CLIENT_MDC_STATS_ITEM(5, mds_getattr, usec)
+					CLIENT_MDC_STATS_ITEM(5, mds_setattr, usec)
 					CLIENT_MDC_STATS_ITEM(5, mds_close, usec)
 					CLIENT_MDC_STATS_ITEM(5, mds_connect, usec)
 					CLIENT_MDC_STATS_ITEM(5, mds_get_root, usec)
 					CLIENT_MDC_STATS_ITEM(5, mds_readpage, usec)
 					CLIENT_MDC_STATS_ITEM(5, mds_statfs, usec)
+					CLIENT_MDC_STATS_ITEM(5, mds_sync, usec)
+					CLIENT_MDC_STATS_ITEM(5, mds_getxattr, usec)
+					CLIENT_MDC_STATS_ITEM(5, mds_setxattr, usec)
 					CLIENT_MDC_STATS_ITEM(5, ldlm_cancel, usec)
 					CLIENT_MDC_STATS_ITEM(5, obd_ping, usec)
 					CLIENT_MDC_STATS_ITEM(5, seq_query, reqs)
@@ -1619,10 +1636,16 @@ recalc_timing             +[[:digit:]]+ samples \[sec\] +([[:digit:]]+).+</patte
 					<path>read_ahead_stats</path>
 				</subpath>
 				<mode>file</mode>
+				LLITE_READ_AHEAD_STATS_FIELD(4, hits, pages)
 				LLITE_READ_AHEAD_STATS_FIELD(4, misses, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, readpage_not_consecutive, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, read_but_discarded, pages)
 				LLITE_READ_AHEAD_STATS_FIELD(4, zero_length_file, pages)
 				LLITE_READ_AHEAD_STATS_FIELD(4, zero_size_window, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, readahead_to_eof, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, failed_to_reach_end, pages)
 				LLITE_READ_AHEAD_STATS_FIELD(4, failed_to_fast_read, pages)
+				LLITE_READ_AHEAD_STATS_FIELD(4, mmap_range_read, pages)
 			</entry>
 		</entry>
 	</entry>

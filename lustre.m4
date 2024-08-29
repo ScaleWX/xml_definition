@@ -41,6 +41,7 @@ dnl $2: index of FIELD
 dnl $3: name of ITEM
 dnl $4: type of FIELD
 dnl $5: type OPTION
+dnl $6: kind of FIELD
 define(`OSC_RPC_STATS_ITEM_FIELD',
 	`ELEMENT($1, field,
 	`INDEX($1 + 1, $2, 1)
@@ -51,17 +52,18 @@ OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_
 OPTION($1 + 1, plugin_instance, osc_rpc_stats, 0)
 OPTION($1 + 1, type, $5, 0)
 OPTION($1 + 1, type_instance, $3, 0)
-OPTION($1 + 1, tsdb_name, osc_rpc_stats, 0)
+OPTION($1 + 1, tsdb_name, osc_rpc_stats_$6, 0)
 OPTION($1 + 1, tsdb_tags, optype=$3 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of STATS_ITEM
-dnl $3: label of STATS_ITEM
+dnl $3: kind of STATS_ITEM
+dnl $4: label of STATS_ITEM
 define(`OSC_RPC_STATS_ITEM',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, osc_rpc_stats_$2, 1)
-PATTERN($1 + 1, `^$3: +([[:digit:]]+)$', 0)
-OSC_RPC_STATS_ITEM_FIELD($1 + 1, 1, $2, number, gauge)', 0)')dnl
+PATTERN($1 + 1, `^$4: +([[:digit:]]+)$', 0)
+OSC_RPC_STATS_ITEM_FIELD($1 + 1, 1, $2, number, gauge, $3)', 0)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: context start string
@@ -73,12 +75,12 @@ define(`OSC_RPC_STATS_PAGES',
 CONTEXT_SUBTYPE($1 + 1, $2, $3, 0)
 PATTERN($1 + 1, `^([[:digit:]]+):[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+\|[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)$', 0)
 FIELD($1 + 1, 1, pgs, string, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_pgs, gauge, pgs, osc_rpc_stats_pgs_per_rpc, type=pgs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
-FIELD($1 + 1, 2, read_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_read_rpcs, derive, read_rpcs, osc_rpc_stats_pgs_per_rpc, type=read_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
-FIELD($1 + 1, 3, read_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_read_percent, gauge, read_percent, osc_rpc_stats_pgs_per_rpc, type=read_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
-FIELD($1 + 1, 4, read_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_read_cum, gauge, read_cum, osc_rpc_stats_pgs_per_rpc, type=read_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
-FIELD($1 + 1, 5, write_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_write_rpcs, derive, write_rpcs, osc_rpc_stats_pgs_per_rpc, type=write_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
-FIELD($1 + 1, 6, write_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_write_percent, gauge, write_percent, osc_rpc_stats_pgs_per_rpc, type=write_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
-FIELD($1 + 1, 7, write_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_write_cum, gauge, write_cum, osc_rpc_stats_pgs_per_rpc, type=write_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)', $4)')dnl
+FIELD($1 + 1, 2, read_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_read_rpcs, derive, read_rpcs, osc_rpc_stats_pgs_per_rpc_rpcs, type=read_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 3, read_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_read_percent, gauge, read_percent, osc_rpc_stats_pgs_per_rpc_percent, type=read_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 4, read_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_read_cum, gauge, read_cum, osc_rpc_stats_pgs_per_rpc_cum, type=read_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 5, write_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_write_rpcs, derive, write_rpcs, osc_rpc_stats_pgs_per_rpc_rpcs, type=write_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 6, write_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_write_percent, gauge, write_percent, osc_rpc_stats_pgs_per_rpc_percent, type=write_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)
+FIELD($1 + 1, 7, write_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:pgs}, osc_rpc_stats_write_cum, gauge, write_cum, osc_rpc_stats_pgs_per_rpc_cum, type=write_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} pgs=${content:pgs}, 0)', $4)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: context start string
@@ -90,12 +92,12 @@ define(`OSC_RPC_STATS_RPCS',
 CONTEXT_SUBTYPE($1 + 1, $2, $3, 0)
 PATTERN($1 + 1, `^([[:digit:]]+):[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+\|[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)$', 0)
 FIELD($1 + 1, 1, rpcs, string, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_rpcs, gauge, rpcs, osc_rpc_stats_rpcs_in_flt, type=rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
-FIELD($1 + 1, 2, read_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_read_rpcs, derive, read_rpcs, osc_rpc_stats_rpcs_in_flt, type=read_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
-FIELD($1 + 1, 3, read_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_read_percent, gauge, read_percent, osc_rpc_stats_rpcs_in_flt, type=read_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
-FIELD($1 + 1, 4, read_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_read_cum, gauge, read_cum, osc_rpc_stats_rpcs_in_flt, type=read_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
-FIELD($1 + 1, 5, write_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_write_rpcs, derive, write_rpcs, osc_rpc_stats_rpcs_in_flt, type=write_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
-FIELD($1 + 1, 6, write_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_write_percent, gauge, write_percent, osc_rpc_stats_rpcs_in_flt, type=write_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
-FIELD($1 + 1, 7, write_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_write_cum, gauge, write_cum, osc_rpc_stats_rpcs_in_flt, type=write_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)', $4)')dnl
+FIELD($1 + 1, 2, read_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_read_rpcs, derive, read_rpcs, osc_rpc_stats_rpcs_in_flt_rpcs, type=read_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 3, read_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_read_percent, gauge, read_percent, osc_rpc_stats_rpcs_in_flt_percent, type=read_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 4, read_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_read_cum, gauge, read_cum, osc_rpc_stats_rpcs_in_flt_cum, type=read_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 5, write_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_write_rpcs, derive, write_rpcs, osc_rpc_stats_rpcs_in_flt_rpcs, type=write_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 6, write_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_write_percent, gauge, write_percent, osc_rpc_stats_rpcs_in_flt_percent, type=write_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)
+FIELD($1 + 1, 7, write_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:rpcs}, osc_rpc_stats_write_cum, gauge, write_cum, osc_rpc_stats_rpcs_in_flt_cum, type=write_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} rpcs=${content:rpcs}, 0)', $4)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: context start string
@@ -107,22 +109,22 @@ define(`OSC_RPC_STATS_OFFSET',
 CONTEXT_SUBTYPE($1 + 1, $2, $3, 0)
 PATTERN($1 + 1, `^([[:digit:]]+):[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+\|[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)[[:blank:]]+([[:digit:]]+)$', 0)
 FIELD($1 + 1, 1, offset, string, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_offset, gauge, offset, osc_rpc_stats_offset, type=offset fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
-FIELD($1 + 1, 2, read_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_read_rpcs, derive, read_rpcs, osc_rpc_stats_offset, type=read_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
-FIELD($1 + 1, 3, read_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_read_percent, gauge, read_percent, osc_rpc_stats_offset, type=read_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
-FIELD($1 + 1, 4, read_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_read_cum, gauge, read_cum, osc_rpc_stats_offset, type=read_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
-FIELD($1 + 1, 5, write_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_write_rpcs, derive, write_rpcs, osc_rpc_stats_offset, type=write_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
-FIELD($1 + 1, 6, write_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_write_percent, gauge, write_percent, osc_rpc_stats_offset, type=write_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
-FIELD($1 + 1, 7, write_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_write_cum, gauge, write_cum, osc_rpc_stats_offset, type=write_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)', $4)')dnl
+FIELD($1 + 1, 2, read_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_read_rpcs, derive, read_rpcs, osc_rpc_stats_offset_rpcs, type=read_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 3, read_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_read_percent, gauge, read_percent, osc_rpc_stats_offset_percent, type=read_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 4, read_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_read_cum, gauge, read_cum, osc_rpc_stats_offset_cum, type=read_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 5, write_rpcs, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_write_rpcs, derive, write_rpcs, osc_rpc_stats_offset_rpcs, type=write_rpcs fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 6, write_percent, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_write_percent, gauge, write_percent, osc_rpc_stats_offset_percent, type=write_percent fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)
+FIELD($1 + 1, 7, write_cum, number, ${key:hostname}, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}-${content:offset}, osc_rpc_stats_write_cum, gauge, write_cum, osc_rpc_stats_offset_cum, type=write_cum fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid} offset=${content:offset}, 0)', $4)')dnl
 dnl
 dnl $1: number of INDENT
 define(`OSC_RPC_STATS_ENTRY',
 	`ELEMENT($1, entry,
 	`SUBPATH($1 + 1, constant, rpc_stats, 1)
 MODE($1 + 1, file, 0)
-OSC_RPC_STATS_ITEM($1 + 1, read_rpcs_in_flt, `read RPCs in flight')
-OSC_RPC_STATS_ITEM($1 + 1, write_rpcs_in_flt, `write RPCs in flight')
-OSC_RPC_STATS_ITEM($1 + 1, pending_write_pages, `pending write pages')
-OSC_RPC_STATS_ITEM($1 + 1, pending_read_pages, `pending read pages')
+OSC_RPC_STATS_ITEM($1 + 1, read_rpcs_in_flt, rpcs_in_flt, `read RPCs in flight')
+OSC_RPC_STATS_ITEM($1 + 1, write_rpcs_in_flt, rpcs_in_flt, `write RPCs in flight')
+OSC_RPC_STATS_ITEM($1 + 1, pending_write_pages, pending_pages, `pending write pages')
+OSC_RPC_STATS_ITEM($1 + 1, pending_read_pages, pending_pages, `pending read pages')
 OSC_RPC_STATS_PAGES($1 + 1, `pages per rpc', `rpcs in flight', 0)
 OSC_RPC_STATS_RPCS($1 + 1, `rpcs in flight', `offset', 0)
 OSC_RPC_STATS_OFFSET($1 + 1, `offset', `', 0)', 0)')dnl
@@ -745,22 +747,23 @@ dnl
 dnl $1: number of INDENT
 dnl $2: index of FIELD
 dnl $3: name of ITEM
-dnl $4: kind of FIELD
-dnl $5: type of FIELD
-dnl $6: type OPTION
-dnl $7: kind of STATS
+dnl $4: unit of FIELD
+dnl $5: kind of FIELD
+dnl $6: type of FIELD
+dnl $7: type OPTION
+dnl $8: kind of STATS
 define(`CLIENT_STATS_ITEM_FIELD',
 	`ELEMENT($1, field,
 	`INDEX($1 + 1, $2, 1)
-NAME($1 + 1, $3_$4, 0)
-TYPE($1 + 1, $5, 0)
+NAME($1 + 1, $3_$5, 0)
+TYPE($1 + 1, $6, 0)
 OPTION($1 + 1, host, ${key:hostname}, 0)
 OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:client_uuid}, 0)
 OPTION($1 + 1, plugin_instance, client_stats, 0)
-OPTION($1 + 1, type, $6, 0)
-OPTION($1 + 1, type_instance, $3_$4, 0)
-OPTION($1 + 1, tsdb_name, $7_stats_$3_$4, 0)
-OPTION($1 + 1, tsdb_tags, fs_name=${subpath:fs_name} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
+OPTION($1 + 1, type, $7, 0)
+OPTION($1 + 1, type_instance, $3_$5, 0)
+OPTION($1 + 1, tsdb_name, $8_stats_`'ifelse($5, samples, $5, $4, reqs, reqs_$5, $4, bytes, bytes_$5, $5), 0)
+OPTION($1 + 1, tsdb_tags, optype=$3_$5 fs_name=${subpath:fs_name} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of CLIENT_STATS_ITEM
@@ -769,7 +772,7 @@ define(`CLIENT_STATS_ITEM_ONE_FIELD',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, llite_stats_$2, 1)
 PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[$3\]', 0)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, llite)', 1)')dnl
+CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, `', samples, number, derive, llite)', 1)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of CLIENT_STATS_ITEM
@@ -778,10 +781,10 @@ define(`CLIENT_STATS_FOUR_FIELDS',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, llite_stats_$2, 1)
 PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, llite)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge, llite)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge, llite)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive, llite)', 1)')dnl
+CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, $3, samples, number, derive, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 2, $2, $3, min, number, gauge, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 3, $2, $3, max, number, gauge, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 4, $2, $3, sum, number, derive, llite)', 1)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of CLIENT_STATS_ITEM
@@ -790,30 +793,31 @@ define(`CLIENT_STATS_FIVE_FIELDS',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, llite_stats_$2, 1)
 PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, llite)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge, llite)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge, llite)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive, llite)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 5, $2, sumsq, number, derive, llite)', 1)')dnl
+CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, $3, samples, number, derive, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 2, $2, $3, min, number, gauge, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 3, $2, $3, max, number, gauge, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 4, $2, $3, sum, number, derive, llite)
+CLIENT_STATS_ITEM_FIELD($1 + 1, 5, $2, $3, sumsq, number, derive, llite)', 1)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: index of FIELD
 dnl $3: name of ITEM
-dnl $4: kind of FIELD
-dnl $5: type of FIELD
-dnl $6: type OPTION
+dnl $4: unit of ITEM
+dnl $5: kind of FIELD
+dnl $6: type of FIELD
+dnl $7: type OPTION
 define(`CLIENT_STATS_MDC_ITEM_FIELD',
 	`ELEMENT($1, field,
 	`INDEX($1 + 1, $2, 1)
-NAME($1 + 1, $3_$4, 0)
-TYPE($1 + 1, $5, 0)
+NAME($1 + 1, $3_$5, 0)
+TYPE($1 + 1, $6, 0)
 OPTION($1 + 1, host, ${key:hostname}, 0)
 OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:mdt_index}-${subpath:client_uuid}, 0)
 OPTION($1 + 1, plugin_instance, client_stats, 0)
-OPTION($1 + 1, type, $6, 0)
-OPTION($1 + 1, type_instance, $3_$4, 0)
-OPTION($1 + 1, tsdb_name, mdc_stats_$4, 0)
-OPTION($1 + 1, tsdb_tags, optype=$3_$4 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
+OPTION($1 + 1, type, $7, 0)
+OPTION($1 + 1, type_instance, $3_$5, 0)
+OPTION($1 + 1, tsdb_name, mdc_stats_`'ifelse($5, samples, $5, $4, reqs, reqs_$5, $4, bytes, bytes_$5, $5), 0)
+OPTION($1 + 1, tsdb_tags, optype=$3_$5 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of CLIENT_STATS_ITEM
@@ -822,30 +826,31 @@ define(`CLIENT_MDC_STATS_ITEM',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, mdc_stats_$2, 1)
 PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
-CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive)
-CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge)
-CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge)
-CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive)
-CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 5, $2, sumsq, number, derive)', 1)')dnl
+CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 1, $2, $3, samples, number, derive)
+CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 2, $2, $3, min, number, gauge)
+CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 3, $2, $3, max, number, gauge)
+CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 4, $2, $3, sum, number, derive)
+CLIENT_STATS_MDC_ITEM_FIELD($1 + 1, 5, $2, $3, sumsq, number, derive)', 1)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: index of FIELD
 dnl $3: name of ITEM
-dnl $4: kind of FIELD
-dnl $5: type of FIELD
-dnl $6: type OPTION
+dnl $4: unit of ITEM
+dnl $5: kind of FIELD
+dnl $6: type of FIELD
+dnl $7: type OPTION
 define(`CLIENT_STATS_OSC_ITEM_FIELD',
 	`ELEMENT($1, field,
 	`INDEX($1 + 1, $2, 1)
-NAME($1 + 1, $3_$4, 0)
-TYPE($1 + 1, $5, 0)
+NAME($1 + 1, $3_$5, 0)
+TYPE($1 + 1, $6, 0)
 OPTION($1 + 1, host, ${key:hostname}, 0)
 OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:ost_index}-${subpath:client_uuid}, 0)
 OPTION($1 + 1, plugin_instance, client_stats, 0)
-OPTION($1 + 1, type, $6, 0)
-OPTION($1 + 1, type_instance, $3_$4, 0)
-OPTION($1 + 1, tsdb_name, osc_stats_$4, 0)
-OPTION($1 + 1, tsdb_tags, optype=$3_$4 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
+OPTION($1 + 1, type, $7, 0)
+OPTION($1 + 1, type_instance, $3_$5, 0)
+OPTION($1 + 1, tsdb_name, osc_stats_`'ifelse($5, samples, $5, $4, reqs, reqs_$5, $4, bytes, bytes_$5, $5), 0)
+OPTION($1 + 1, tsdb_tags, optype=$3_$5 fs_name=${subpath:fs_name} ost_index=${subpath:ost_index} client_uuid=${subpath:client_uuid}, 0)', 0)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of CLIENT_STATS_ITEM
@@ -854,11 +859,11 @@ define(`CLIENT_OSC_STATS_ITEM',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, osc_stats_$2, 1)
 PATTERN($1 + 1, `$2 +([[:digit:]]+) samples \[$3\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
-CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive)
-CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 2, $2, min, number, gauge)
-CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 3, $2, max, number, gauge)
-CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 4, $2, sum, number, derive)
-CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 5, $2, sumsq, number, derive)', 1)')dnl
+CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 1, $2, $3, samples, number, derive)
+CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 2, $2, $3, min, number, gauge)
+CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 3, $2, $3, max, number, gauge)
+CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 4, $2, $3, sum, number, derive)
+CLIENT_STATS_OSC_ITEM_FIELD($1 + 1, 5, $2, $3, sumsq, number, derive)', 1)')dnl
 dnl
 dnl $1: number of INDENT
 dnl $2: name of CLIENT_STATS_ITEM
@@ -867,7 +872,7 @@ define(`LLITE_READ_AHEAD_STATS_FIELD',
 	`ELEMENT($1, item,
 	`NAME($1 + 1, llite_read_ahead_stats_$2, 1)
 PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[$3\]', 0)
-CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, samples, number, derive, llite_read_ahead)', 1)')dnl
+CLIENT_STATS_ITEM_FIELD($1 + 1, 1, $2, $3, samples, number, derive, llite_read_ahead)', 1)')dnl
 dnl
 define(`LUSTRE2_12_XML_ENTRIES',
 `

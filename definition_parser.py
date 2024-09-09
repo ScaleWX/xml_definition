@@ -23,6 +23,7 @@ class Field:
         self,
         index,
         name,
+        plugin,
         plugin_instance,
         collection_type,
         type_instance,
@@ -31,6 +32,7 @@ class Field:
     ):
         self.index = index
         self.name = name
+        self.plugin = plugin
         self.plugin_instance = plugin_instance
         self.collection_type = collection_type
         self.type_instance = type_instance
@@ -76,7 +78,9 @@ def parse_field(field):
     field_name = field.find("./name").text
     for option in field.findall("option"):
         name = option.find("name").text
-        if name == "plugin_instance":
+        if name == "plugin":
+            plugin = option.find("string").text
+        elif name == "plugin_instance":
             plugin_instance = option.find("string").text
         elif name == "type":
             collection_type = option.find("string").text
@@ -91,6 +95,7 @@ def parse_field(field):
     return Field(
         index,
         field_name,
+        plugin,
         plugin_instance,
         collection_type,
         type_instance,
@@ -139,6 +144,7 @@ def print_item(item):
 
 def print_main_field(field):
     print("    Field Name     : ", field.name)
+    print("    Plugin         : ", field.plugin)
     print("    Plugin Instance: ", field.plugin_instance)
     print("    Type Instance  : ", field.type_instance)
     print("    TSDB Name      : ", field.tsdb_name)

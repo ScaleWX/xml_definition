@@ -573,6 +573,16 @@ HEAD(Lustre-es6_0)
 						JOBSTAT_FIELD_META_OPERATIONS(6, 123, migrate, number, mdt, 1)
 					</item>
 				</entry>
+				<entry>
+					<subpath>
+						<subpath_type>constant</subpath_type>
+						<path>rename_stats</path>
+					</subpath>
+					<mode>file</mode>
+					RENAME_STATS(same_dir)
+					RENAME_STATS(crossdir_src)
+					RENAME_STATS(crossdir_tgt)
+				</entry>
 			</entry>
 		</entry>
 		<entry>

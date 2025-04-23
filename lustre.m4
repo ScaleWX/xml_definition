@@ -197,6 +197,78 @@ define(`RECOVERY_STATUS_ITEM',
 PATTERN($1 + 1, `$2: +$4', 0)
 FIELD($1 + 1, 1, $2, $5, ${key:hostname}, ${subpath:fs_name}-${subpath:$3_index}, $3_recovery_status, gauge, $2, $3_recovery_status, optype=$2 fs_name=${subpath:fs_name} $3_index=${subpath:$3_index}, 0)', $6)')dnl
 dnl
+dnl $1: kind of stats
+define(`RENAME_STATS',
+	`ELEMENT(5, item,
+	`NAME(6, rename_stats_$1, 1)
+PATTERN(6,
+`- $1:(
+[[:blank:]]+4KB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+8KB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+16KB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+32KB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+64KB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+128KB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+256KB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+512KB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+1MB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+2MB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+4MB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+8MB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+16MB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+32MB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+64MB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+128MB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+256MB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*(
+[[:blank:]]+512MB: \{ sample:)*([[:blank:]]+)*([[:digit:]]+)*(,.*)*', 0)
+RENAME_STATS_LINE(6, 1, $1, 4kb)
+RENAME_STATS_LINE(6, 5, $1, 8kb)
+RENAME_STATS_LINE(6, 9, $1, 16kb)
+RENAME_STATS_LINE(6, 13, $1, 32kb)
+RENAME_STATS_LINE(6, 17, $1, 64kb)
+RENAME_STATS_LINE(6, 21, $1, 128kb)
+RENAME_STATS_LINE(6, 25, $1, 256kb)
+RENAME_STATS_LINE(6, 29, $1, 512kb)
+RENAME_STATS_LINE(6, 33, $1, 1mb)
+RENAME_STATS_LINE(6, 37, $1, 2mb)
+RENAME_STATS_LINE(6, 41, $1, 4mb)
+RENAME_STATS_LINE(6, 45, $1, 8mb)
+RENAME_STATS_LINE(6, 49, $1, 16mb)
+RENAME_STATS_LINE(6, 53, $1, 32mb)
+RENAME_STATS_LINE(6, 57, $1, 64mb)
+RENAME_STATS_LINE(6, 61, $1, 128mb)
+RENAME_STATS_LINE(6, 65, $1, 256mb)
+RENAME_STATS_LINE(6, 69, $1, 512mb)', 1)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: index of FIELD
+dnl $3: name of FIELD
+dnl $4: size of bucket
+define(`RENAME_STATS_LINE',
+`RENAME_STATS_FIELD($1, $2, $3_$4_label, string, derive, 0)
+RENAME_STATS_FIELD($1, eval($2 + 1), $3_$4_blank, string, derive, 0)
+RENAME_STATS_FIELD($1, eval($2 + 2), $3_$4, number, derive, 0)
+RENAME_STATS_FIELD($1, eval($2 + 3), $3_$4_leftover, string, derive, 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: index of FIELD
+dnl $3: name of FIELD
+dnl $4: type of FIELD
+dnl $5: type OPTION
+dnl $6: is first child of parent definition
+define(`RENAME_STATS_FIELD',
+	`ELEMENT($1, field,
+	`INDEX($1 + 1, $2, 1)
+NAME($1 + 1, $3, 0)
+TYPE($1 + 1, $4, 0)
+OPTION($1 + 1, host, ${key:hostname}, 0)
+OPTION($1 + 1, plugin, ${subpath:fs_name}-${subpath:mdt_index}, 0)
+OPTION($1 + 1, plugin_instance, rename_stats, 0)
+OPTION($1 + 1, type, $5, 0)
+OPTION($1 + 1, type_instance, $3, 0)
+OPTION($1 + 1, tsdb_name, rename_stats, 0)
+OPTION($1 + 1, tsdb_tags, optype=$3 fs_name=${subpath:fs_name} mdt_index=${subpath:mdt_index}, 0)', $6)')dnl
+dnl
 dnl $1: number of INDENT
 dnl $2: name of RECOVERY_STATUS_CONNECTED_ITEM
 dnl $3: "mdt" or "ost"

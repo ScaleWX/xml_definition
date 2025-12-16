@@ -2049,3 +2049,30 @@ FIELD($1, 2, hard, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_ind
 FIELD($1, 3, soft, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_md_glb_$2_${content:id}, gauge, soft, qmt_md_glb_$2, optype=soft fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} md_index=${subpath:md_index} $2_id=${content:id}, 0)
 FIELD($1, 4, granted, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_md_glb_$2_${content:id}, gauge, granted, qmt_md_glb_$2, optype=granted fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} md_index=${subpath:md_index} $2_id=${content:id}, 0)
 FIELD($1, 5, time, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_md_glb_$2_${content:id}, gauge, time, qmt_md_glb_$2, optype=time fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} md_index=${subpath:md_index} $2_id=${content:id}, 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of MD_STATS
+dnl $3: is first child of parent definition
+define(`NODEMAP_MD_STATS_ITEM',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, nodemap_md_stats_$2, 1)
+PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[usecs\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
+FIELD($1 + 1, 1, nodemap_md_stats_$2, number, ${key:hostname}, nodemap-${subpath:nodemap_name}, nodemap_md_stats, derive, nodemap_md_stats_$2, nodemap_md_stats, optype=$2 nodemap_name=${subpath:nodemap_name}, 0)
+FIELD($1 + 1, 2, nodemap_md_stats_$2_min, number, ${key:hostname}, nodemap-${subpath:nodemap_name}, nodemap_md_stats_min, derive, nodemap_md_stats_$2_min, nodemap_md_stats_min, optype=$2 nodemap_name=${subpath:nodemap_name}, 0)
+FIELD($1 + 1, 3, nodemap_md_stats_$2_max, number, ${key:hostname}, nodemap-${subpath:nodemap_name}, nodemap_md_stats_max, derive, nodemap_md_stats_$2_max, nodemap_md_stats_max, optype=$2 nodemap_name=${subpath:nodemap_name}, 0)
+FIELD($1 + 1, 4, nodemap_md_stats_$2_sum, number, ${key:hostname}, nodemap-${subpath:nodemap_name}, nodemap_md_stats_sum, derive, nodemap_md_stats_$2_sum, nodemap_md_stats_sum, optype=$2 nodemap_name=${subpath:nodemap_name}, 0)
+FIELD($1 + 1, 5, nodemap_md_stats_$2_sumsq, number, ${key:hostname}, nodemap-${subpath:nodemap_name}, nodemap_md_stats_sumsq, derive, nodemap_md_stats_$2_sumsq, nodemap_md_stats_sumsq, optype=$2 nodemap_name=${subpath:nodemap_name}, 0)', $3)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: name of DT_STATS
+dnl $3: unit
+dnl $4: is first child of parent definition
+define(`NODEMAP_DT_STATS_ITEM',
+	`ELEMENT($1, item,
+	`NAME($1 + 1, nodemap_dt_stats_$2, 1)
+PATTERN($1 + 1, `^$2 +([[:digit:]]+) samples \[$3\] ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+) ([[:digit:]]+)', 0)
+FIELD($1 + 1, 1, nodemap_dt_stats_$2, number, ${key:hostname}, nodemap-${subpath:nodemap_name}, nodemap_dt_stats, derive, nodemap_dt_stats_$2, nodemap_dt_stats, optype=$2 nodemap_name=${subpath:nodemap_name}, 0)
+FIELD($1 + 1, 2, nodemap_dt_stats_$2_min, number, ${key:hostname}, nodemap-${subpath:nodemap_name}, nodemap_dt_stats_min, derive, nodemap_dt_stats_$2_min, nodemap_dt_stats_min, optype=$2 nodemap_name=${subpath:nodemap_name}, 0)
+FIELD($1 + 1, 3, nodemap_dt_stats_$2_max, number, ${key:hostname}, nodemap-${subpath:nodemap_name}, nodemap_dt_stats_max, derive, nodemap_dt_stats_$2_max, nodemap_dt_stats_max, optype=$2 nodemap_name=${subpath:nodemap_name}, 0)
+FIELD($1 + 1, 4, nodemap_dt_stats_$2_sum, number, ${key:hostname}, nodemap-${subpath:nodemap_name}, nodemap_dt_stats_sum, derive, nodemap_dt_stats_$2_sum, nodemap_dt_stats_sum, optype=$2 nodemap_name=${subpath:nodemap_name}, 0)
+FIELD($1 + 1, 5, nodemap_dt_stats_$2_sumsq, number, ${key:hostname}, nodemap-${subpath:nodemap_name}, nodemap_dt_stats_sumsq, derive, nodemap_dt_stats_$2_sumsq, nodemap_dt_stats_sumsq, optype=$2 nodemap_name=${subpath:nodemap_name}, 0)', $4)')dnl

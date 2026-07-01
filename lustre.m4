@@ -2051,6 +2051,24 @@ FIELD($1, 4, granted, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_
 FIELD($1, 5, time, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_md_glb_$2_${content:id}, gauge, time, qmt_md_glb_$2, optype=time fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} md_index=${subpath:md_index} $2_id=${content:id}, 0)')dnl
 dnl
 dnl $1: number of INDENT
+dnl $2: kind of Limit Items
+define(`QMT_LQA_DT',
+	`FIELD($1, 1, id, string, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_lqa_dt_glb_$2_${content:id}, gauge, id, qmt_lqa_dt_glb_$2, optype=id fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} lqa_name=${subpath:lqa_name} $2_id=${content:id}, 1)
+FIELD($1, 2, hard, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_lqa_dt_glb_$2_${content:id}, gauge, hard, qmt_lqa_dt_glb_$2, optype=hard fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} lqa_name=${subpath:lqa_name} $2_id=${content:id}, 0)
+FIELD($1, 3, soft, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_lqa_dt_glb_$2_${content:id}, gauge, soft, qmt_lqa_dt_glb_$2, optype=soft fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} lqa_name=${subpath:lqa_name} $2_id=${content:id}, 0)
+FIELD($1, 4, granted, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_lqa_dt_glb_$2_${content:id}, gauge, granted, qmt_lqa_dt_glb_$2, optype=granted fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} lqa_name=${subpath:lqa_name} $2_id=${content:id}, 0)
+FIELD($1, 5, time, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_lqa_dt_glb_$2_${content:id}, gauge, time, qmt_lqa_dt_glb_$2, optype=time fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} lqa_name=${subpath:lqa_name} $2_id=${content:id}, 0)')dnl
+dnl
+dnl $1: number of INDENT
+dnl $2: kind of Limit Items
+define(`QMT_LQA_MD',
+	`FIELD($1, 1, id, string, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_lqa_md_glb_$2_${content:id}, gauge, id, qmt_lqa_md_glb_$2, optype=id fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} lqa_name=${subpath:lqa_name} $2_id=${content:id}, 1)
+FIELD($1, 2, hard, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_lqa_md_glb_$2_${content:id}, gauge, hard, qmt_lqa_md_glb_$2, optype=hard fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} lqa_name=${subpath:lqa_name} $2_id=${content:id}, 0)
+FIELD($1, 3, soft, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_lqa_md_glb_$2_${content:id}, gauge, soft, qmt_lqa_md_glb_$2, optype=soft fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} lqa_name=${subpath:lqa_name} $2_id=${content:id}, 0)
+FIELD($1, 4, granted, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_lqa_md_glb_$2_${content:id}, gauge, granted, qmt_lqa_md_glb_$2, optype=granted fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} lqa_name=${subpath:lqa_name} $2_id=${content:id}, 0)
+FIELD($1, 5, time, number, ${key:hostname}, ${subpath:fs_name}-${subpath:qmt_index}, qmt_lqa_md_glb_$2_${content:id}, gauge, time, qmt_lqa_md_glb_$2, optype=time fs_name=${subpath:fs_name} qmt_index=${subpath:qmt_index} lqa_name=${subpath:lqa_name} $2_id=${content:id}, 0)')dnl
+dnl
+dnl $1: number of INDENT
 dnl $2: name of MD_STATS
 dnl $3: is first child of parent definition
 define(`NODEMAP_MD_STATS_ITEM',

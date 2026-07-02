@@ -793,7 +793,7 @@ HEAD(Lustre-es6_0)
 				<entry>
 					<subpath>
 						<subpath_type>regular_expression</subpath_type>
-						<path>^dt-([[:alnum:]]+$)</path>
+						<path>^dt-(.+)$</path>
 						<subpath_field>
 							<index>1</index>
 							<name>dt_index</name>
@@ -834,7 +834,7 @@ HEAD(Lustre-es6_0)
 				<entry>
 					<subpath>
 						<subpath_type>regular_expression</subpath_type>
-						<path>^md-([[:alnum:]]+$)</path>
+						<path>^md-(.+)$</path>
 						<subpath_field>
 							<index>1</index>
 							<name>md_index</name>

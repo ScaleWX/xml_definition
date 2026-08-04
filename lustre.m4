@@ -490,6 +490,7 @@ EXPORT_MD_STATS_ITEM_V2($1 + 1, samedir_rename, 0)
 EXPORT_MD_STATS_ITEM_V2($1 + 1, parallel_rename_dir, 0)
 EXPORT_MD_STATS_ITEM_V2($1 + 1, parallel_rename_file, 0)
 EXPORT_MD_STATS_ITEM_V2($1 + 1, crossdir_rename, 0)
+EXPORT_MD_STATS_ITEM_V2($1 + 1, rename_trylocks, 0)
 $2', $3)')dnl
 dnl
 dnl $1: number of INDENT

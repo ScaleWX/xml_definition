@@ -41,6 +41,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.14.0_ddn134.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.14.0_ddn212.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 lustre-2.14.0_ddn229.xml %{buildroot}%{_sysconfdir}%{filedatadir}
+%{__install} -Dp -m0644 lustre-2.14.0_ddn259.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 ime-1.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 ime-1.2.xml %{buildroot}%{_sysconfdir}%{filedatadir}
 %{__install} -Dp -m0644 infiniband-0.1.xml %{buildroot}%{_sysconfdir}%{filedatadir}/infiniband-0.1_definition.xml
@@ -92,6 +93,7 @@ mkdir -p %{buildroot}%{_sysconfdir}%{filedatadir}
 %{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn134.xml
 %{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn212.xml
 %{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn229.xml
+%{_sysconfdir}%{filedatadir}/lustre-2.14.0_ddn259.xml
 %{_sysconfdir}%{filedatadir}/ime-1.1.xml
 %{_sysconfdir}%{filedatadir}/ime-1.2.xml
 %{_sysconfdir}%{filedatadir}/infiniband-0.1_definition.xml

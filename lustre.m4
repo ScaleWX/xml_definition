@@ -487,6 +487,8 @@ EXPORT_MD_STATS_ITEM_V2($1 + 1, setxattr, 0)
 EXPORT_MD_STATS_ITEM_V2($1 + 1, statfs, 0)
 EXPORT_MD_STATS_ITEM_V2($1 + 1, sync, 0)
 EXPORT_MD_STATS_ITEM_V2($1 + 1, samedir_rename, 0)
+EXPORT_MD_STATS_ITEM_V2($1 + 1, parallel_rename_dir, 0)
+EXPORT_MD_STATS_ITEM_V2($1 + 1, parallel_rename_file, 0)
 EXPORT_MD_STATS_ITEM_V2($1 + 1, crossdir_rename, 0)
 $2', $3)')dnl
 dnl

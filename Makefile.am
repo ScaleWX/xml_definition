@@ -26,6 +26,7 @@ M4_DESTINATION_FILES = exa-5.2.5.m4 \
 	infiniband-0.1.m4 \
 	infiniband-1.1.m4 \
 	lfs-0.1.m4 \
+	ldiskfs-0.1.m4 \
 	lustre-1.8.9.m4 \
 	lustre-2.1.6.m4 \
 	lustre-2.4.2.m4 \
@@ -43,7 +44,7 @@ M4_DESTINATION_FILES = exa-5.2.5.m4 \
 	sfa-12.2.m4
 
 
-M4_FILES = general.m4 lustre.m4 sfa.m4 $(M4_DESTINATION_FILES)
+M4_FILES = general.m4 lustre.m4 sfa.m4 ldiskfs.m4 $(M4_DESTINATION_FILES)
 
 XML_DESTINATION_FILES=$(M4_DESTINATION_FILES:.m4=.xml)
 

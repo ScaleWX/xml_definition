@@ -1075,25 +1075,6 @@ HEAD(Lustre-es6_0)
 	<entry>
 		<subpath>
 			<subpath_type>constant</subpath_type>
-			<path>/sys/fs/ldiskfs</path>
-		</subpath>
-		<mode>directory</mode>
-		<entry>
-			<subpath>
-				<subpath_type>regular_expression</subpath_type>
-				<path>([^0-9]+[0-9]+)</path>
-					<subpath_field>
-						<index>1</index>
-						<name>device_name</name>
-					</subpath_field>
-			</subpath>
-			<mode>directory</mode>
-			LDISKFS_INFO_ENTRY(3, lifetime_write_kbytes, (.+), number, ${key:hostname}, ${subpath:device_name}, derive, 1)
-		</entry>
-	</entry>
-	<entry>
-		<subpath>
-			<subpath_type>constant</subpath_type>
 			<path>/sys/kernel/debug/lustre</path>
 		</subpath>
 		<mode>directory</mode>

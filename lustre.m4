@@ -6,25 +6,6 @@ dnl
 include(`general.m4')dnl
 dnl
 dnl $1: number of INDENT
-dnl $2: path of entry, name of field use this value
-dnl $3: item name
-dnl $4: item pattern
-dnl $5: field type
-dnl $6: host OPTION
-dnl $7: plugin OPTION
-dnl $8: plugin_instance OPTION
-dnl $9: type OPTION
-dnl $10: type_instance OPTION
-dnl $11: tsdb_name OPTION
-dnl $12: tsdb_tags OPTION
-dnl $13: is first child of parent definition
-define(`CONSTANT_FILE_ENTRY',
-	`ELEMENT($1, entry,
-SUBPATH($1+1, constant, $2, 1)
-MODE($1+1, file, 0)
-ONE_FIELD_ITEM($1+1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, 0), $13)')dnl
-dnl
-dnl $1: number of INDENT
 dnl $2: path of entry, used as field name
 dnl $3: item pattern
 dnl $4: plugin_instance OPTION
